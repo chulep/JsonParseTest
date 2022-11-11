@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkModel: Codable {
+struct PicModel: Codable {
     let total: Int
     let results: [Results]
 }
@@ -28,6 +28,5 @@ struct User: Codable {
 
 enum Urls: String {
     case full
-    case regular
     case small
 }
