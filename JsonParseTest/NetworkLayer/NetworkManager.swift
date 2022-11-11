@@ -20,10 +20,21 @@ final class NetworkManager {
         URLSession.shared.dataTask(with: request) { data, response, error in
             let httpRespone = response as? HTTPURLResponse
             DispatchQueue.main.async {
-                print("Код сети: \(String(describing: httpRespone?.statusCode))")
+                print("Код сети: \(httpRespone!.statusCode)")
                 completion(data, error)
             }
         }.resume()
+    }
+    
+    func getPic(url: String?, completion: @escaping (Data?) -> Void){
+        guard let urlString = url,
+        let urlEnd = URL(string: urlString) else { return }
+        let request = URLRequest(url: urlEnd)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion(data)
+        }.resume()
+
     }
     
     private func createURL(parameters: [String: String]) -> URL {
