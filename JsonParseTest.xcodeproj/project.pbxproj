@@ -18,6 +18,7 @@
 		5DF8420D291ABE4800E18817 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DF8420B291ABE4800E18817 /* LaunchScreen.storyboard */; };
 		5DF84215291ABE5B00E18817 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84214291ABE5B00E18817 /* NetworkManager.swift */; };
 		5DF84217291ABF7300E18817 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84216291ABF7300E18817 /* Model.swift */; };
+		5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB83AB291FD0A700D09558 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		5DF8420E291ABE4800E18817 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF84214291ABE5B00E18817 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5DF84216291ABF7300E18817 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		5DFB83AB291FD0A700D09558 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,11 +109,20 @@
 				5D5E80B7291C0B62008BDF3C /* NetworkLayer */,
 				5D5E80B8291C0B76008BDF3C /* CoreDataLayer */,
 				5D5E80B9291C0BA0008BDF3C /* SearchModule */,
+				5DFB83AA291FD05F00D09558 /* DetailModule */,
 				5DF84209291ABE4800E18817 /* Assets.xcassets */,
 				5DF8420B291ABE4800E18817 /* LaunchScreen.storyboard */,
 				5DF8420E291ABE4800E18817 /* Info.plist */,
 			);
 			path = JsonParseTest;
+			sourceTree = "<group>";
+		};
+		5DFB83AA291FD05F00D09558 /* DetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				5DFB83AB291FD0A700D09558 /* DetailViewController.swift */,
+			);
+			path = DetailModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 				5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */,
 				5DF84217291ABF7300E18817 /* Model.swift in Sources */,
 				5D1FCDAF291D29C600150DD1 /* MyTabBarController.swift in Sources */,
+				5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */,
 				5DF84215291ABE5B00E18817 /* NetworkManager.swift in Sources */,
 				5DF84208291ABE4600E18817 /* JsonParseTest.xcdatamodeld in Sources */,
 			);
