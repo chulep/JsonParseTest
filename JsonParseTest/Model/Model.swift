@@ -17,7 +17,7 @@ struct Results: Codable {
     let created_at: String
     let description: String?
     let user: User?
-    let urls: [Urls.RawValue: String]
+    let urls: Urls
 }
 
 struct User: Codable {
@@ -26,7 +26,7 @@ struct User: Codable {
     let instagram_username: String?
 }
 
-enum Urls: String {
-    case full
-    case small
+struct Urls: Codable {
+    let full: String
+    let small: String
 }

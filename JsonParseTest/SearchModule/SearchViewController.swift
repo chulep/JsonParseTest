@@ -19,8 +19,6 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
         navigationItem.titleView = searchBar
         searchBar.delegate = self
         
-        view.backgroundColor = .red
-        
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
@@ -34,7 +32,7 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
-        networkManager.getPic(url: photos?.results[indexPath.row].urls["small"]) { data in
+        networkManager.getPic(url: photos?.results[indexPath.row].urls.small) { data in
             DispatchQueue.main.async {
                 cell.setImage(imageData: data)
             }
