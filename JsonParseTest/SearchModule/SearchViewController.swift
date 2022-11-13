@@ -21,12 +21,19 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
         
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tap)
+        networkManager.getPhotos(search: "other") { data, error in
+            guard let data = data else { return }
+            do {
+                self.photos = try JSONDecoder().decode(PicModel.self, from: data)
+                self.collectionView.reloadData()
+            } catch {
+                print(error, error.localizedDescription)
+            }
+        }
     }
     
+    //MARK: - CollectionView DataSourse
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(photos?.results.count ?? 0)
         return photos?.results.count ?? 0
     }
     
@@ -40,10 +47,21 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        hideKeyboard()
+        let detailViewController = DetailViewController()
+        detailViewController.result = photos?.results[indexPath.row]
+        let navController = UINavigationController(rootViewController: detailViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
+    }
+    
+    //MARK: - ScrollView Delegate
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         hideKeyboard()
     }
     
+    //MARK: - SearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         networkManager.getPhotos(search: searchBar.text ?? "other") { data, error in
             guard let data = data else { return }
@@ -54,9 +72,10 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
                 print(error, error.localizedDescription)
             }
         }
+        hideKeyboard()
     }
     
-    @objc func hideKeyboard() {
+    private func hideKeyboard() {
         searchBar.endEditing(true)
     }
     
