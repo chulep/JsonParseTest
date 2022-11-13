@@ -50,7 +50,6 @@ class DetailViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         for i in [imageView, descriptionStackView, activityIndicator] {
             view.addSubview(i)
         }
@@ -127,7 +126,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveToFavorites() {
-        //
+        
     }
     
     @objc func sharePhoto() {

@@ -16,7 +16,12 @@ class MyTabBarController: UITabBarController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.title = "Search"
         navController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        viewControllers = [navController]
+        
+        let favoriteViewController = FavoriteViewController()
+        let navController2 = UINavigationController(rootViewController: favoriteViewController)
+        navController2.tabBarItem.title = "Save"
+        navController2.tabBarItem.image = UIImage(systemName: "heart")
+        viewControllers = [navController, navController2]
     }
     
     private func createFlowLayout() -> UICollectionViewFlowLayout {
