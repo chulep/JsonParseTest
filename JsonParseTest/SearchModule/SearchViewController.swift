@@ -20,6 +20,16 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
         searchBar.delegate = self
         
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
+        
+        networkManager.getPhotos(search: "other") { data, error in
+            guard let data = data else { return }
+            do {
+                self.photos = try JSONDecoder().decode(PicModel.self, from: data)
+                self.collectionView.reloadData()
+            } catch {
+                print(error, error.localizedDescription)
+            }
+        }
     }
     
     //MARK: - CollectionView DataSourse
