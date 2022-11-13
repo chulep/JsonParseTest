@@ -127,7 +127,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveToFavorites() {
-        
+        //
     }
     
     @objc func sharePhoto() {
