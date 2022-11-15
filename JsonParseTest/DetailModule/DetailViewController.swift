@@ -21,6 +21,7 @@ class DetailViewController: UIViewController {
     
     lazy var imageView: UIImageView = {
         $0.contentMode = .scaleAspectFit
+        $0.backgroundColor = .white
         return $0
     }(UIImageView())
     
@@ -50,10 +51,7 @@ class DetailViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        for i in [imageView, descriptionStackView, activityIndicator] {
-            view.addSubview(i)
-        }
+        addSubviews()
         setupNavBar()
         createLayout()
         addHideTapGestureRecognizer()
@@ -66,17 +64,10 @@ class DetailViewController: UIViewController {
         descriptionStackView.clipsToBounds = true
     }
     
-    //MARK: - Set Data
-    private func setImage() {
-        activityIndicator.startAnimating()
-        networkManager.getPic(url: result.urls.full) { data in
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: data)
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-                self.descriptionAutoHide()
-            }
+    //MARK: - Add Subviews
+    private func addSubviews() {
+        for i in [imageView, descriptionStackView, activityIndicator] {
+            view.addSubview(i)
         }
     }
     
@@ -99,6 +90,20 @@ class DetailViewController: UIViewController {
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(saveToFavorites)),
             UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
+    }
+    
+    //MARK: - Set download image
+    private func setImage() {
+        activityIndicator.startAnimating()
+        networkManager.getPic(url: result.urls.full) { data in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data)
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.descriptionAutoHide()
+            }
+        }
     }
     
     //MARK: - Description Hide Methods
@@ -127,7 +132,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveToFavorites() {
-        //
+        
     }
     
     @objc func sharePhoto() {

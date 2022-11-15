@@ -25,11 +25,18 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = bounds
+        createUI()
     }
     
     func setImage(imageData: Data?) {
-        guard let imageData = imageData else { return }
-        imageView.image = UIImage(data: imageData)!
+        guard let imageData = imageData,
+              let image = UIImage(data: imageData) else { return }
+        imageView.image = image
+    }
+    
+    private func createUI() {
+        imageView.frame = bounds
+        layer.cornerRadius = bounds.width / 14
+        clipsToBounds = true
     }
 }
