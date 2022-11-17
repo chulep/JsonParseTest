@@ -22,8 +22,6 @@ struct Results: Codable {
 
 struct User: Codable {
     let username: String?
-    let name: String?
-    let instagram_username: String?
 }
 
 struct Urls: Codable {

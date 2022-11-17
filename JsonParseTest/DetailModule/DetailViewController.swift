@@ -10,6 +10,7 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var networkManager = NetworkManager()
+    var coreDataManager = CoreDataManager()
     
     var result: Results! {
         didSet {
@@ -132,7 +133,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveToFavorites() {
-        
+
     }
     
     @objc func sharePhoto() {

@@ -12,6 +12,8 @@
 		5D1FCDB4291D55BC00150DD1 /* NetworkFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB3291D55BC00150DD1 /* NetworkFetcher.swift */; };
 		5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91C6162921403100705E62 /* FavoriteViewController.swift */; };
 		5DC3F0D42920D2F400A6897D /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */; };
+		5DE6619B2923B3210087DBAE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619A2923B3200087DBAE /* CoreDataStack.swift */; };
+		5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */; };
 		5DF841FE291ABE4600E18817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF841FD291ABE4600E18817 /* AppDelegate.swift */; };
 		5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF841FF291ABE4600E18817 /* SceneDelegate.swift */; };
 		5DF84202291ABE4600E18817 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84201291ABE4600E18817 /* SearchViewController.swift */; };
@@ -29,6 +31,8 @@
 		5D1FCDB3291D55BC00150DD1 /* NetworkFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetcher.swift; sourceTree = "<group>"; };
 		5D91C6162921403100705E62 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		5DE6619A2923B3200087DBAE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5DF841FA291ABE4600E18817 /* JsonParseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonParseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF841FD291ABE4600E18817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DF841FF291ABE4600E18817 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				5DF84206291ABE4600E18817 /* JsonParseTest.xcdatamodeld */,
+				5DE6619A2923B3200087DBAE /* CoreDataStack.swift */,
+				5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */,
 			);
 			path = CoreDataLayer;
 			sourceTree = "<group>";
@@ -215,11 +221,13 @@
 				5D1FCDB2291D457B00150DD1 /* PhotoCollectionViewCell.swift in Sources */,
 				5DC3F0D42920D2F400A6897D /* ModuleBuilder.swift in Sources */,
 				5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */,
+				5DE6619B2923B3210087DBAE /* CoreDataStack.swift in Sources */,
 				5DF84217291ABF7300E18817 /* Model.swift in Sources */,
 				5D1FCDAF291D29C600150DD1 /* MyTabBarController.swift in Sources */,
 				5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */,
 				5DF84215291ABE5B00E18817 /* NetworkManager.swift in Sources */,
 				5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */,
+				5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */,
 				5DF84208291ABE4600E18817 /* JsonParseTest.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
