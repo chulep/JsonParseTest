@@ -10,11 +10,14 @@ import UIKit
 class FavoriteViewController: UIViewController {
     
     private lazy var collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createCollectionViewFlowLayout())
+    let coreDataManager = CoreDataManager()
+    var picture = [SavePicture]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Save"
         setupCollectionView()
+        getData()
     }
     
     //MARK: - CollectionView Configure
@@ -34,21 +37,31 @@ class FavoriteViewController: UIViewController {
         return flowLayout
     }
     
+    //MARK: - Get Data
+    func getData() {
+        picture = coreDataManager.getData()
+        collectionView.reloadData()
+    }
 }
+    
     //MARK: - CollectionView Delegate & DataSourse
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        picture.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let detailViewController = DetailViewController()
+        //detailViewController.result = photos?.results[indexPath.row]
+        let navController = UINavigationController(rootViewController: detailViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
-        cell.backgroundColor = .red
+        cell.setImage(imageData: picture[indexPath.row].imageSave)
         return cell
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: UICollectionViewController, UISearchBarDelegate {
     
-    let networkManager = NetworkManager()
+    let networkFetcher = NetworkFetcher()
     var photos: PicModel?
     var searchBar = UISearchBar()
     
@@ -21,13 +21,15 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
         
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
         
-        networkManager.getPhotos(search: "other") { data, error in
-            guard let data = data else { return }
-            do {
-                self.photos = try JSONDecoder().decode(PicModel.self, from: data)
-                self.collectionView.reloadData()
-            } catch {
-                print(error, error.localizedDescription)
+        networkFetcher.getModel(searchText: "text") { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.photos = data
+                    self.collectionView.reloadData()
+                }
+            case .failure(_):
+                break
             }
         }
     }
@@ -39,7 +41,7 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
-        networkManager.getPic(url: photos?.results[indexPath.row].urls.small) { data in
+        networkFetcher.getImage(url: photos?.results[indexPath.row].urls.small) { data in
             DispatchQueue.main.async {
                 cell.setImage(imageData: data)
             }
@@ -63,13 +65,15 @@ class SearchViewController: UICollectionViewController, UISearchBarDelegate {
     
     //MARK: - SearchBar Delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        networkManager.getPhotos(search: searchBar.text ?? "other") { data, error in
-            guard let data = data else { return }
-            do {
-                self.photos = try JSONDecoder().decode(PicModel.self, from: data)
-                self.collectionView.reloadData()
-            } catch {
-                print(error, error.localizedDescription)
+        networkFetcher.getModel(searchText: searchBar.text ?? "") { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.photos = data
+                    self.collectionView.reloadData()
+                }
+            case .failure(_):
+                break
             }
         }
         hideKeyboard()
