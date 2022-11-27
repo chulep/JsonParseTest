@@ -31,7 +31,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     func setImage(imageData: Data?) {
         guard let imageData = imageData,
               let image = UIImage(data: imageData) else { return }
-        imageView.image = image
+                imageView.image = image
     }
     
     private func createUI() {

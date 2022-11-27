@@ -9,7 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var networkManager = NetworkManager()
+    var networkFetcher = NetworkFetcher()
     var coreDataManager = CoreDataManager()
     
     var result: Results! {
@@ -96,13 +96,11 @@ class DetailViewController: UIViewController {
     //MARK: - Set download image
     private func setImage() {
         activityIndicator.startAnimating()
-        networkManager.getPic(url: result.urls.full) { data in
-            guard let data = data else { return }
+        networkFetcher.getImage(url: result.urls.full) { data in
+            guard let data = data,
+            let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: data)
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-                self.descriptionAutoHide()
+                self.imageView.image = image
             }
         }
     }
