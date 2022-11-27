@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PicModel: Codable {
+struct UnsplashModel: Codable {
     let total: Int
     let results: [Results]
 }
