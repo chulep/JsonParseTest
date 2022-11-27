@@ -9,17 +9,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var networkFetcher = NetworkFetcher()
-    var coreDataManager = CoreDataManager()
-    
-    var result: Results! {
-        didSet {
-            nameLebel.text = "Name: " + (result.user?.username ?? "")
-            dateLabel.text = "Date: " + result.created_at
-            descriptionLabel.text = "Description: " + (result.description ?? "")
-        }
-    }
-    
+    var presenter: DetailPresenterType?
+
     lazy var imageView: UIImageView = {
         $0.contentMode = .scaleAspectFit
         $0.backgroundColor = .white
@@ -49,6 +40,13 @@ class DetailViewController: UIViewController {
         return $0
     }(UIActivityIndicatorView())
     
+    //MARK: - Init
+    
+    convenience init(presenter: DetailPresenterType?) {
+        self.init(nibName: nil, bundle: nil)
+        self.presenter = presenter
+    }
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +54,7 @@ class DetailViewController: UIViewController {
         setupNavBar()
         createLayout()
         addHideTapGestureRecognizer()
-        setImage()
+        setData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,15 +92,21 @@ class DetailViewController: UIViewController {
     }
     
     //MARK: - Set download image
-    private func setImage() {
+    private func setData() {
         activityIndicator.startAnimating()
-        networkFetcher.getImage(url: result.urls.full) { data in
-            guard let data = data,
-            let image = UIImage(data: data) else { return }
+        nameLebel.text = presenter?.name
+        descriptionLabel.text = presenter?.description
+        dateLabel.text = presenter?.date
+        
+        presenter?.getImage(completion: { data in
             DispatchQueue.main.async {
+                guard let data = data,
+                let image = UIImage(data: data) else { return }
                 self.imageView.image = image
+                self.activityIndicator.stopAnimating()
+                self.descriptionAutoHide()
             }
-        }
+        })
     }
     
     //MARK: - Description Hide Methods
@@ -135,7 +139,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func sharePhoto() {
-        let share = UIActivityViewController(activityItems: [result.urls.full], applicationActivities: nil)
-        present(share, animated: true)
+        //let share = UIActivityViewController(activityItems: [result.urls.full], applicationActivities: nil)
+        //present(share, animated: true)
     }
 }

@@ -38,4 +38,10 @@ class SearchPresenter: SearchPresenterType {
         return cellPresenter
     }
     
+    func createDetailPresenter(indexPath: IndexPath) -> DetailPresenterType? {
+        guard let result = result?.results[indexPath.row] else { return nil }
+        let detailPresenter = DetailPresenter(networkFetcher: networkFetcher, result: result)
+        return detailPresenter
+    }
+    
 }

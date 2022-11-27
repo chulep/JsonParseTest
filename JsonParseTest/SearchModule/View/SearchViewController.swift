@@ -87,7 +87,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let detailPresenter = presenter?.createDetailPresenter(indexPath: indexPath)
+        let detailViewController = DetailViewController(presenter: detailPresenter)
+        let navController = UINavigationController(rootViewController: detailViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
