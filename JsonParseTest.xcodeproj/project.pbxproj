@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D159D312933B34E009BF004 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D159D302933B34E009BF004 /* SearchPresenter.swift */; };
+		5D159D342933B378009BF004 /* SearchProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D159D332933B378009BF004 /* SearchProtocols.swift */; };
+		5D159D362933B95C009BF004 /* PhotoCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D159D352933B95C009BF004 /* PhotoCellPresenter.swift */; };
 		5D1FCDAF291D29C600150DD1 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDAE291D29C600150DD1 /* MyTabBarController.swift */; };
 		5D1FCDB2291D457B00150DD1 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */; };
 		5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */; };
@@ -26,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D159D302933B34E009BF004 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		5D159D332933B378009BF004 /* SearchProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocols.swift; sourceTree = "<group>"; };
+		5D159D352933B95C009BF004 /* PhotoCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCellPresenter.swift; sourceTree = "<group>"; };
 		5D1FCDAE291D29C600150DD1 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -57,6 +63,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D159D2E2933B2FB009BF004 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5DF84201291ABE4600E18817 /* SearchViewController.swift */,
+				5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5D159D2F2933B30B009BF004 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5D159D302933B34E009BF004 /* SearchPresenter.swift */,
+				5D159D352933B95C009BF004 /* PhotoCellPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5D159D322933B362009BF004 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5D159D332933B378009BF004 /* SearchProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		5D1FCDB0291D2F7300150DD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,8 +119,9 @@
 		5D5E80B9291C0BA0008BDF3C /* SearchModule */ = {
 			isa = PBXGroup;
 			children = (
-				5DF84201291ABE4600E18817 /* SearchViewController.swift */,
-				5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */,
+				5D159D322933B362009BF004 /* Protocols */,
+				5D159D2E2933B2FB009BF004 /* View */,
+				5D159D2F2933B30B009BF004 /* Presenter */,
 			);
 			path = SearchModule;
 			sourceTree = "<group>";
@@ -217,6 +250,7 @@
 			files = (
 				5DF84202291ABE4600E18817 /* SearchViewController.swift in Sources */,
 				5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */,
+				5D159D312933B34E009BF004 /* SearchPresenter.swift in Sources */,
 				5DF841FE291ABE4600E18817 /* AppDelegate.swift in Sources */,
 				5D1FCDB2291D457B00150DD1 /* PhotoCollectionViewCell.swift in Sources */,
 				5DC3F0D42920D2F400A6897D /* ModuleBuilder.swift in Sources */,
@@ -225,6 +259,8 @@
 				5DF84217291ABF7300E18817 /* Model.swift in Sources */,
 				5D1FCDAF291D29C600150DD1 /* MyTabBarController.swift in Sources */,
 				5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */,
+				5D159D362933B95C009BF004 /* PhotoCellPresenter.swift in Sources */,
+				5D159D342933B378009BF004 /* SearchProtocols.swift in Sources */,
 				5DF84215291ABE5B00E18817 /* NetworkFetcher.swift in Sources */,
 				5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */,
 				5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */,

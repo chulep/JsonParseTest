@@ -8,11 +8,12 @@
 import Foundation
 
 final class NetworkFetcher {
+    
     private let networkManager = NetworkManager()
     
     //MARK: - Logic
     
-    func getModel(searchText: String, completion: @escaping (Result<PicModel?, Error>) -> Void) {
+    func getModel(searchText: String, completion: @escaping (Result<UnsplashModel?, Error>) -> Void) {
         let request = createRequest(searchText: searchText)
         
         networkManager.getModelExecuteTask(request: request, completion: completion)

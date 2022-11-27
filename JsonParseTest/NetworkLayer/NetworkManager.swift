@@ -8,10 +8,9 @@
 import Foundation
 
 class NetworkManager {
-    let networkManager = NetworkManager()
     
     func getModelExecuteTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, Error>) -> Void) {
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else { return completion(.success(nil)) }
 
             do {
@@ -25,8 +24,9 @@ class NetworkManager {
     }
     
     func getImageExecuteTask(url: URL, completion: @escaping (Data?) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if error == nil { completion(data) } else { completion(nil) }
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            guard let data = data else { return completion(nil) }
+            completion(data)
         }.resume()
     }
     
