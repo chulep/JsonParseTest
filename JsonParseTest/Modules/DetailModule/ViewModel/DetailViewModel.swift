@@ -23,7 +23,7 @@ class DetailViewModel: DetailViewModelType {
         self.url = result.urls.full
         self.name = "Name: " + (result.user?.username ?? "")
         self.description = "Description: " + (result.description ?? "")
-        self.date = "Date: " + (result.created_at)
+        self.date = "Date: " + (result.created_at ?? "")
     }
     
     //MARK: - Methods

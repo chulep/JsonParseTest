@@ -5,8 +5,8 @@
 //  Created by Pavel Schulepov on 29.11.2022.
 //
 
-import Foundation
+import UIKit
 
 final class ConstantHelper {
-    static let radius = 5
+    static let radius: CGFloat = 5
 }

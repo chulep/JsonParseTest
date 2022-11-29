@@ -7,22 +7,42 @@
 
 import UIKit
 
-class FavoriteViewController: UIViewController {
+final class FavoriteViewController: UIViewController, FavoriteViewControllerType {
+    
+    private var viewModel: FavoriteViewModelType?
+    
+    //MARK: - UI Elements
     
     private lazy var collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createCollectionViewFlowLayout())
-    let coreDataManager = CoreDataManager()
-    var picture = [SavePicture]()
+    
+    //MARK: - Init
+    
+    convenience init(viewModel: FavoriteViewModelType) {
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Save"
+        setupSelf()
+        addSubviews()
         setupCollectionView()
-        getData()
+        setData()
     }
     
-    //MARK: - CollectionView Configure
-    private func setupCollectionView() {
+    //MARK: - Methods
+    
+    private func setupSelf() {
+        view.backgroundColor = ColorHelper.white
+    }
+    
+    private func addSubviews() {
         view.addSubview(collectionView)
+    }
+    
+    private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
@@ -37,18 +57,26 @@ class FavoriteViewController: UIViewController {
         return flowLayout
     }
     
-    //MARK: - Get Data
-    func getData() {
-        picture = coreDataManager.getData()
-        collectionView.reloadData()
+    private func setData() {
+        viewModel?.getData(completion: { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(()):
+                    self?.collectionView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        })
     }
 }
     
     //MARK: - CollectionView Delegate & DataSourse
+
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        picture.count
+        viewModel?.pictureArray?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

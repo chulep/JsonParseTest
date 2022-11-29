@@ -1,5 +1,5 @@
 //
-//  SearchPresenter.swift
+//  SearchViewModel.swift
 //  JsonParseTest
 //
 //  Created by Pavel Schulepov on 27.11.2022.
@@ -34,7 +34,7 @@ class SearchViewModel: SearchViewModelType {
     
     func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellViewModelType? {
         guard let result = result?.results[indexPath.row] else { return nil }
-        let cellPresenter = PhotoCellPresenter(result: result, networkFetcher: networkFetcher)
+        let cellPresenter = PhotoCellViewModel(result: result, networkFetcher: networkFetcher)
         return cellPresenter
     }
     
