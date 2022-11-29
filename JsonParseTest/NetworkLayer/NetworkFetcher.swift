@@ -8,22 +8,20 @@
 import Foundation
 
 final class NetworkFetcher {
-    
-    private let networkManager = NetworkManager()
-    
+
     //MARK: - Logic
     
     func getModel(searchText: String, completion: @escaping (Result<UnsplashModel?, Error>) -> Void) {
         let request = createRequest(searchText: searchText)
         
-        networkManager.getModelExecuteTask(request: request, completion: completion)
+        NetworkManager.execute.getModelTask(request: request, completion: completion)
     }
     
     func getImage(url: String?, completion: @escaping (Data?) -> Void){
         guard let urlString = url,
         let url = URL(string: urlString) else { return completion(nil) }
         
-        networkManager.getImageExecuteTask(url: url, completion: completion)
+        NetworkManager.execute.getImageTask(url: url, completion: completion)
     }
     
     //MARK: - Support Private Methods
@@ -58,7 +56,7 @@ final class NetworkFetcher {
         return parametrs
     }
     
-    func printJson(data: Data?) {
+    private func printJsonString(data: Data?) {
         guard let data = data else { return }
         do {
             let data = try JSONSerialization.jsonObject(with: data, options: [])

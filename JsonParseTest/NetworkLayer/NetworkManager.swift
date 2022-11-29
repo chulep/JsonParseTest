@@ -9,7 +9,9 @@ import Foundation
 
 class NetworkManager {
     
-    func getModelExecuteTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, Error>) -> Void) {
+    static let execute = NetworkManager()
+    
+    func getModelTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, Error>) -> Void) {
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else { return completion(.success(nil)) }
 
@@ -23,7 +25,7 @@ class NetworkManager {
         }.resume()
     }
     
-    func getImageExecuteTask(url: URL, completion: @escaping (Data?) -> Void) {
+    func getImageTask(url: URL, completion: @escaping (Data?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data else { return completion(nil) }
             completion(data)
