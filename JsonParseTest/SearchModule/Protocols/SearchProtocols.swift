@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol SearchPresenterType {
+protocol SearchViewModelType {
     var result: UnsplashModel? { get set }
     func getDownloadData(searchText: String, completion: @escaping (Result<(), Error>) -> Void)
-    func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellPresenterType?
-    func createDetailPresenter(indexPath: IndexPath) -> DetailPresenterType?
+    func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellViewModelType?
+    func createDetailPresenter(indexPath: IndexPath) -> DetailViewModelType?
 }
 
-protocol PhotoCellPresenterType {
+protocol PhotoCellViewModelType {
     init(result: Results, networkFetcher: NetworkFetcher)
     func getDownloadImage(completion: @escaping (Data?) -> Void)
 }

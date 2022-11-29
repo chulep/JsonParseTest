@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PhotoCellPresenter: PhotoCellPresenterType {
+class PhotoCellPresenter: PhotoCellViewModelType {
     
     let result: Results
     let networkfetcher: NetworkFetcher

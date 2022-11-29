@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SearchPresenter: SearchPresenterType {
+class SearchViewModel: SearchViewModelType {
 
     var result: UnsplashModel?
     let networkFetcher: NetworkFetcher
@@ -32,15 +32,15 @@ class SearchPresenter: SearchPresenterType {
         }
     }
     
-    func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellPresenterType? {
+    func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellViewModelType? {
         guard let result = result?.results[indexPath.row] else { return nil }
         let cellPresenter = PhotoCellPresenter(result: result, networkFetcher: networkFetcher)
         return cellPresenter
     }
     
-    func createDetailPresenter(indexPath: IndexPath) -> DetailPresenterType? {
+    func createDetailPresenter(indexPath: IndexPath) -> DetailViewModelType? {
         guard let result = result?.results[indexPath.row] else { return nil }
-        let detailPresenter = DetailPresenter(networkFetcher: networkFetcher, result: result)
+        let detailPresenter = DetailViewModel(networkFetcher: networkFetcher, result: result)
         return detailPresenter
     }
     

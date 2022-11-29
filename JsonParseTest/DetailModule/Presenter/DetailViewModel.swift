@@ -1,5 +1,5 @@
 //
-//  DetailPresenter.swift
+//  DetailViewModel.swift
 //  JsonParseTest
 //
 //  Created by Pavel Schulepov on 27.11.2022.
@@ -7,25 +7,18 @@
 
 import Foundation
 
-protocol DetailPresenterType {
-    var name: String { get }
-    var description: String { get }
-    var date: String { get }
-    func getImage(completion: @escaping (Data?) -> Void)
-}
-
-class DetailPresenter: DetailPresenterType {
+class DetailViewModel: DetailViewModelType {
     
     var name: String
     var description: String
     var date: String
-    private var url: String
+    var url: String
     
-    var networkFetcher: NetworkFetcher?
+    private var networkFetcher: NetworkFetcher?
     
     //MARK: - Init
     
-    init(networkFetcher: NetworkFetcher, result: Results) {
+    required init(networkFetcher: NetworkFetcher, result: Results) {
         self.networkFetcher = networkFetcher
         self.url = result.urls.full
         self.name = "Name: " + (result.user?.username ?? "")
