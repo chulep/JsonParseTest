@@ -7,56 +7,51 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController, DetailViewControllerType {
     
-    var networkFetcher = NetworkFetcher()
-    var coreDataManager = CoreDataManager()
+    private var viewModel: DetailViewModelType?
+
+    //MARK: - UI Elements
     
-    var result: Results! {
-        didSet {
-            nameLebel.text = "Name: " + (result.user?.username ?? "")
-            dateLabel.text = "Date: " + result.created_at
-            descriptionLabel.text = "Description: " + (result.description ?? "")
-        }
-    }
-    
-    lazy var imageView: UIImageView = {
+    private var imageView: UIImageView = {
         $0.contentMode = .scaleAspectFit
         $0.backgroundColor = .white
         return $0
     }(UIImageView())
     
-    var nameLebel = UILabel()
-    var dateLabel = UILabel()
-    var descriptionLabel = UILabel()
+    private var nameLebel = UILabel()
+    private var dateLabel = UILabel()
+    private var descriptionLabel = UILabel()
     
-    lazy var descriptionStackView: UIStackView = {
-        for i in [dateLabel, nameLebel, descriptionLabel] {
-            $0.addArrangedSubview(i)
-        }
+    private var descriptionStackView: UIStackView = {
         $0.alignment = .fill
         $0.distribution = .fillEqually
         $0.axis = .vertical
-        $0.backgroundColor = #colorLiteral(red: 0.8627251983, green: 0.8735858798, blue: 0.8733949065, alpha: 1)
+        $0.backgroundColor = ColorHelper.lightGray
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layoutMargins = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
         $0.isLayoutMarginsRelativeArrangement = true
         return $0
     }(UIStackView())
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        $0.style = .medium
-        return $0
-    }(UIActivityIndicatorView())
+    private var activityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    //MARK: - Init
+    
+    convenience init(presenter: DetailViewModelType?) {
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = presenter
+    }
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
-        setupNavBar()
-        createLayout()
+        addNavigationItem()
+        addConstraints()
         addHideTapGestureRecognizer()
-        setImage()
+        setData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,14 +61,20 @@ class DetailViewController: UIViewController {
     }
     
     //MARK: - Add Subviews
+    
     private func addSubviews() {
-        for i in [imageView, descriptionStackView, activityIndicator] {
-            view.addSubview(i)
-        }
+        descriptionStackView.addArrangedSubview(dateLabel)
+        descriptionStackView.addArrangedSubview(nameLebel)
+        descriptionStackView.addArrangedSubview(descriptionLabel)
+        
+        view.addSubview(imageView)
+        view.addSubview(descriptionStackView)
+        view.addSubview(activityIndicator)
     }
     
     //MARK: - UI
-    private func createLayout() {
+    
+    private func addConstraints() {
         imageView.frame = view.bounds
         activityIndicator.center = imageView.center
         
@@ -85,7 +86,7 @@ class DetailViewController: UIViewController {
         ])
     }
     
-    private func setupNavBar() {
+    private func addNavigationItem() {
         navigationController?.navigationBar.tintColor = .systemGray
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelDetail))
         navigationItem.rightBarButtonItems = [
@@ -93,19 +94,27 @@ class DetailViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
     }
     
-    //MARK: - Set download image
-    private func setImage() {
+    //MARK: - Set Data Method
+    
+    private func setData() {
         activityIndicator.startAnimating()
-        networkFetcher.getImage(url: result.urls.full) { data in
-            guard let data = data,
-            let image = UIImage(data: data) else { return }
+        nameLebel.text = viewModel?.name
+        descriptionLabel.text = viewModel?.description
+        dateLabel.text = viewModel?.date
+        
+        viewModel?.getImage(completion: { data in
             DispatchQueue.main.async {
+                guard let data = data,
+                let image = UIImage(data: data) else { return }
                 self.imageView.image = image
+                self.activityIndicator.stopAnimating()
+                self.descriptionAutoHide()
             }
-        }
+        })
     }
     
     //MARK: - Description Hide Methods
+    
     private func addHideTapGestureRecognizer() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(descriptionTapHide))
         view.addGestureRecognizer(tap)
@@ -125,17 +134,19 @@ class DetailViewController: UIViewController {
         }
     }
     
-    //MARK: - objc Method
-    @objc func cancelDetail() {
+    //MARK: - Other Methods
+    
+    @objc private func cancelDetail() {
         dismiss(animated: true)
     }
     
-    @objc func saveToFavorites() {
+    @objc private func saveToFavorites() {
 
     }
     
-    @objc func sharePhoto() {
-        let share = UIActivityViewController(activityItems: [result.urls.full], applicationActivities: nil)
+    @objc private func sharePhoto() {
+        guard let url = viewModel?.url else { return }
+        let share = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(share, animated: true)
     }
 }

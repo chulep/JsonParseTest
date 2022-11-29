@@ -10,7 +10,7 @@ import UIKit
 class PhotoCollectionViewCell: UICollectionViewCell {
     
     static let identifire = "idCell"
-    var presenter: PhotoCellPresenterType?
+    var viewModel: PhotoCellViewModelType?
     
     //MARK: - UI Elements
     
@@ -39,7 +39,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
     
     private func setImage() {
-        presenter?.getDownloadImage(completion: { [weak self] data in
+        viewModel?.getDownloadImage(completion: { [weak self] data in
             guard let data = data,
             let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {

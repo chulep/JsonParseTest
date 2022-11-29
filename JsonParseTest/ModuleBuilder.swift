@@ -11,7 +11,7 @@ final class ModuleBuilder {
     
     static func createSearchModule() -> UIViewController {
         let networkFetcher = NetworkFetcher()
-        let presenter = SearchPresenter(networkFetcher: networkFetcher)
+        let presenter = SearchViewModel(networkFetcher: networkFetcher)
         let viewController = SearchViewController(presenter: presenter)
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.title = "Search"

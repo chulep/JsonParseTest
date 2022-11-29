@@ -9,7 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    var presenter: SearchPresenterType?
+    var viewModel: SearchViewModelType?
     
     //MARK: - UI elements
     
@@ -18,9 +18,9 @@ class SearchViewController: UIViewController {
     
     //MARK: - Init
     
-    convenience init(presenter: SearchPresenterType) {
+    convenience init(presenter: SearchViewModelType) {
         self.init(nibName: nil, bundle: nil)
-        self.presenter = presenter
+        self.viewModel = presenter
     }
     
     //MARK: - Lifecycle
@@ -51,7 +51,7 @@ class SearchViewController: UIViewController {
     }
     
     private func downloadData(searchText: String) {
-        presenter?.getDownloadData(searchText: searchText, completion: { [weak self] result in
+        viewModel?.getDownloadData(searchText: searchText, completion: { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(()):
@@ -83,11 +83,15 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter?.result?.results.count ?? 0
+        viewModel?.result?.results.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let detailPresenter = viewModel?.createDetailPresenter(indexPath: indexPath)
+        let detailViewController = DetailViewController(presenter: detailPresenter)
+        let navController = UINavigationController(rootViewController: detailViewController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -97,7 +101,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     //data sourse
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
-        cell.presenter = presenter?.createPhotoCellPresenter(indexPath: indexPath)
+        cell.viewModel = viewModel?.createPhotoCellPresenter(indexPath: indexPath)
         return cell
     }
 }
