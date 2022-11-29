@@ -18,9 +18,9 @@ class SearchViewController: UIViewController {
     
     //MARK: - Init
     
-    convenience init(presenter: SearchViewModelType) {
+    convenience init(viewModel: SearchViewModelType) {
         self.init(nibName: nil, bundle: nil)
-        self.viewModel = presenter
+        self.viewModel = viewModel
     }
     
     //MARK: - Lifecycle

@@ -9,19 +9,18 @@ import CoreData
 
 class CoreDataManager {
     
-    func getData() -> [SavePicture] {
-        var allPicture = [SavePicture]()
+    func getData(completion: @escaping (Result<[SavePicture], Error>) -> Void) {
         let coreDataStack = CoreDataStack()
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<SavePicture> = SavePicture.fetchRequest()
         
         do {
-            allPicture = try context.fetch(fetchRequest)
+            completion(.success(try context.fetch(fetchRequest)))
             print("ExportCoreData DONE")
         } catch {
+            completion(.failure(error))
             print("ExportCoreData ERROR")
         }
-        return allPicture
     }
     
     func saveData(id: String, url: String, name: String?, description: String?, date: String?, image: Data?) {

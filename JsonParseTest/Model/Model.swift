@@ -2,29 +2,21 @@
 //  Model.swift
 //  JsonParseTest
 //
-//  Created by Pavel Schulepov on 08.11.2022.
+//  Created by Pavel Schulepov on 29.11.2022.
 //
 
 import Foundation
 
-struct UnsplashModel: Codable {
-    let total: Int
-    let results: [Results]
-}
-
-struct Results: Codable {
+struct Model {
     let id: String
-    let created_at: String
+    let name: String?
+    let date: String?
     let description: String?
-    let user: User?
-    let urls: Urls
+    let imageData: Data?
+    let imageUrl: sizeUrl
 }
 
-struct User: Codable {
-    let username: String?
-}
-
-struct Urls: Codable {
+struct sizeUrl {
     let full: String
     let small: String
 }

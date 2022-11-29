@@ -34,7 +34,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     private func setupUI() {
         addSubview(imageView)
         imageView.frame = bounds
-        layer.cornerRadius = 10
+        layer.cornerRadius = ConstantHelper.radius
         clipsToBounds = true
     }
     

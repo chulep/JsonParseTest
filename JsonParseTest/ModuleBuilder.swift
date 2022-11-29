@@ -11,12 +11,17 @@ final class ModuleBuilder {
     
     static func createSearchModule() -> UIViewController {
         let networkFetcher = NetworkFetcher()
-        let presenter = SearchViewModel(networkFetcher: networkFetcher)
-        let viewController = SearchViewController(presenter: presenter)
+        let viewModel = SearchViewModel(networkFetcher: networkFetcher)
+        let viewController = SearchViewController(viewModel: viewModel)
         let navController = UINavigationController(rootViewController: viewController)
-        navController.tabBarItem.title = "Search"
-        navController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         return navController
+    }
+    
+    static func createFavoriteModule() -> UIViewController {
+        let coreDataManager = CoreDataManager()
+        let viewModel = FavoriteViewModel(coreDataManager: coreDataManager)
+        let viewController = FavoriteViewController(viewModel: viewModel)
+        return viewController
     }
 
 }
