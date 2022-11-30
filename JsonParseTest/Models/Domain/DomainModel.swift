@@ -7,16 +7,12 @@
 
 import Foundation
 
-struct Model {
-    let id: String
+struct DomainModel {
+    let id: String?
     let name: String?
     let date: String?
     let description: String?
     let imageData: Data?
-    let imageUrl: sizeUrl
-}
-
-struct sizeUrl {
-    let full: String
-    let small: String
+    let imageUrlFull: String?
+    let imageUrlSmall: String?
 }

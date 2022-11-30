@@ -15,6 +15,7 @@
 		5D1FCDB2291D457B00150DD1 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */; };
 		5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */; };
 		5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91C6162921403100705E62 /* FavoriteViewController.swift */; };
+		5D9EC88A2937124E00B1CDE5 /* SavePicture+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */; };
 		5DC3F0D42920D2F400A6897D /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */; };
 		5DE6619B2923B3210087DBAE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619A2923B3200087DBAE /* CoreDataStack.swift */; };
 		5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */; };
@@ -25,8 +26,8 @@
 		5DE7B8AD2936775B007B3FE6 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8AC2936775B007B3FE6 /* FavoriteViewModel.swift */; };
 		5DE7B8AF293682CC007B3FE6 /* FavoriteViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8AE293682CC007B3FE6 /* FavoriteViewControllerType.swift */; };
 		5DE7B8B1293682F7007B3FE6 /* FavoriteViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8B0293682F7007B3FE6 /* FavoriteViewModelType.swift */; };
-		5DE7B8B32936874B007B3FE6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8B22936874B007B3FE6 /* Model.swift */; };
-		5DE7B8B7293688B3007B3FE6 /* NetworkModel+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8B6293688B3007B3FE6 /* NetworkModel+Mappable.swift */; };
+		5DE7B8B32936874B007B3FE6 /* DomainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8B22936874B007B3FE6 /* DomainModel.swift */; };
+		5DE7B8B7293688B3007B3FE6 /* UnsplashModel+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B8B6293688B3007B3FE6 /* UnsplashModel+Mappable.swift */; };
 		5DF841FE291ABE4600E18817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF841FD291ABE4600E18817 /* AppDelegate.swift */; };
 		5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF841FF291ABE4600E18817 /* SceneDelegate.swift */; };
 		5DF84202291ABE4600E18817 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84201291ABE4600E18817 /* SearchViewController.swift */; };
@@ -34,7 +35,7 @@
 		5DF8420A291ABE4800E18817 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DF84209291ABE4800E18817 /* Assets.xcassets */; };
 		5DF8420D291ABE4800E18817 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DF8420B291ABE4800E18817 /* LaunchScreen.storyboard */; };
 		5DF84215291ABE5B00E18817 /* NetworkFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84214291ABE5B00E18817 /* NetworkFetcher.swift */; };
-		5DF84217291ABF7300E18817 /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84216291ABF7300E18817 /* NetworkModel.swift */; };
+		5DF84217291ABF7300E18817 /* UnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF84216291ABF7300E18817 /* UnsplashModel.swift */; };
 		5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DFB83AB291FD0A700D09558 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5D91C6162921403100705E62 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavePicture+Mappable.swift"; sourceTree = "<group>"; };
 		5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		5DE6619A2923B3200087DBAE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -57,8 +59,8 @@
 		5DE7B8AC2936775B007B3FE6 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		5DE7B8AE293682CC007B3FE6 /* FavoriteViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewControllerType.swift; sourceTree = "<group>"; };
 		5DE7B8B0293682F7007B3FE6 /* FavoriteViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModelType.swift; sourceTree = "<group>"; };
-		5DE7B8B22936874B007B3FE6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		5DE7B8B6293688B3007B3FE6 /* NetworkModel+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkModel+Mappable.swift"; sourceTree = "<group>"; };
+		5DE7B8B22936874B007B3FE6 /* DomainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModel.swift; sourceTree = "<group>"; };
+		5DE7B8B6293688B3007B3FE6 /* UnsplashModel+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsplashModel+Mappable.swift"; sourceTree = "<group>"; };
 		5DF841FA291ABE4600E18817 /* JsonParseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonParseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF841FD291ABE4600E18817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DF841FF291ABE4600E18817 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 		5DF8420C291ABE4800E18817 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DF8420E291ABE4800E18817 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF84214291ABE5B00E18817 /* NetworkFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetcher.swift; sourceTree = "<group>"; };
-		5DF84216291ABF7300E18817 /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		5DF84216291ABF7300E18817 /* UnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashModel.swift; sourceTree = "<group>"; };
 		5DFB83AB291FD0A700D09558 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,19 +127,19 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		5D1FCDB0291D2F7300150DD1 /* Model */ = {
+		5D1FCDB0291D2F7300150DD1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5DE7B8B22936874B007B3FE6 /* Model.swift */,
+				5D9EC88B293719A400B1CDE5 /* Domain */,
+				5D9EC88D293719EB00B1CDE5 /* Mappers */,
+				5D9EC88C293719D100B1CDE5 /* Data */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5D5E80B7291C0B62008BDF3C /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				5DF84216291ABF7300E18817 /* NetworkModel.swift */,
-				5DE7B8B6293688B3007B3FE6 /* NetworkModel+Mappable.swift */,
 				5DF84214291ABE5B00E18817 /* NetworkFetcher.swift */,
 				5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */,
 			);
@@ -147,7 +149,6 @@
 		5D5E80B8291C0B76008BDF3C /* CoreDataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				5DF84206291ABE4600E18817 /* JsonParseTest.xcdatamodeld */,
 				5DE6619A2923B3200087DBAE /* CoreDataStack.swift */,
 				5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */,
 			);
@@ -162,6 +163,32 @@
 				5D159D2F2933B30B009BF004 /* ViewModel */,
 			);
 			path = SearchModule;
+			sourceTree = "<group>";
+		};
+		5D9EC88B293719A400B1CDE5 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				5DE7B8B22936874B007B3FE6 /* DomainModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		5D9EC88C293719D100B1CDE5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5DF84206291ABE4600E18817 /* JsonParseTest.xcdatamodeld */,
+				5DF84216291ABF7300E18817 /* UnsplashModel.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5D9EC88D293719EB00B1CDE5 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */,
+				5DE7B8B6293688B3007B3FE6 /* UnsplashModel+Mappable.swift */,
+			);
+			path = Mappers;
 			sourceTree = "<group>";
 		};
 		5DC3F0D529213F8A00A6897D /* View */ = {
@@ -258,7 +285,7 @@
 				5DF841FD291ABE4600E18817 /* AppDelegate.swift */,
 				5DF841FF291ABE4600E18817 /* SceneDelegate.swift */,
 				5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */,
-				5D1FCDB0291D2F7300150DD1 /* Model */,
+				5D1FCDB0291D2F7300150DD1 /* Models */,
 				5DE7B8A7293673B7007B3FE6 /* Modules */,
 				5D5E80B7291C0B62008BDF3C /* NetworkLayer */,
 				5D5E80B8291C0B76008BDF3C /* CoreDataLayer */,
@@ -354,7 +381,7 @@
 				5DF84202291ABE4600E18817 /* SearchViewController.swift in Sources */,
 				5DE7B89F29366AD6007B3FE6 /* ConstantHelper.swift in Sources */,
 				5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */,
-				5DE7B8B7293688B3007B3FE6 /* NetworkModel+Mappable.swift in Sources */,
+				5DE7B8B7293688B3007B3FE6 /* UnsplashModel+Mappable.swift in Sources */,
 				5D159D312933B34E009BF004 /* SearchViewModel.swift in Sources */,
 				5DE7B8AD2936775B007B3FE6 /* FavoriteViewModel.swift in Sources */,
 				5DF841FE291ABE4600E18817 /* AppDelegate.swift in Sources */,
@@ -364,16 +391,17 @@
 				5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */,
 				5DE7B8B1293682F7007B3FE6 /* FavoriteViewModelType.swift in Sources */,
 				5DE6619B2923B3210087DBAE /* CoreDataStack.swift in Sources */,
-				5DF84217291ABF7300E18817 /* NetworkModel.swift in Sources */,
+				5DF84217291ABF7300E18817 /* UnsplashModel.swift in Sources */,
 				5D1FCDAF291D29C600150DD1 /* TabBarController.swift in Sources */,
 				5DE7B8A129366ADF007B3FE6 /* ColorHelper.swift in Sources */,
 				5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */,
 				5D159D3E2933CD50009BF004 /* DetailViewModel.swift in Sources */,
 				5D159D362933B95C009BF004 /* PhotoCellViewModel.swift in Sources */,
-				5DE7B8B32936874B007B3FE6 /* Model.swift in Sources */,
+				5DE7B8B32936874B007B3FE6 /* DomainModel.swift in Sources */,
 				5D159D342933B378009BF004 /* SearchProtocols.swift in Sources */,
 				5DE7B8A629366F8A007B3FE6 /* DetailViewModelType.swift in Sources */,
 				5DF84215291ABE5B00E18817 /* NetworkFetcher.swift in Sources */,
+				5D9EC88A2937124E00B1CDE5 /* SavePicture+Mappable.swift in Sources */,
 				5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */,
 				5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */,
 				5DF84208291ABE4600E18817 /* JsonParseTest.xcdatamodeld in Sources */,
