@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct Model {
+struct DomainModel {
     let id: String?
     let name: String?
     let date: String?
     let description: String?
     let imageData: Data?
     let imageUrlFull: String?
+    let imageUrlSmall: String?
 }

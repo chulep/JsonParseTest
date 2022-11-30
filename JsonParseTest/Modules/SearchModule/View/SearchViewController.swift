@@ -83,7 +83,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.result?.results.count ?? 0
+        viewModel?.result?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

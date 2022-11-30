@@ -9,7 +9,7 @@ import Foundation
 
 final class FavoriteViewModel: FavoriteViewModelType {
     
-    var pictureArray: [SavePicture]?
+    var pictureArray: [DomainModel]?
     
     private let coreDataManager: CoreDataManager
     

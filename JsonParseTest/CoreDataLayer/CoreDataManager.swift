@@ -9,8 +9,9 @@ import CoreData
 
 class CoreDataManager {
     
-    func getData(completion: @escaping (Result<[Model], Error>) -> Void) {
-        let coreDataStack = CoreDataStack()
+    private let coreDataStack = CoreDataStack()
+    
+    func getData(completion: @escaping (Result<[DomainModel], Error>) -> Void) {
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<SavePicture> = SavePicture.fetchRequest()
         
@@ -25,7 +26,6 @@ class CoreDataManager {
     }
     
     func saveData(id: String?, url: String?, name: String?, description: String?, date: String?, image: Data?) {
-        let coreDataStack = CoreDataStack()
         let context = coreDataStack.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "RecipeData", in: context)
         let object = NSManagedObject(entity: entity!, insertInto: context) as? SavePicture
@@ -46,7 +46,6 @@ class CoreDataManager {
     
     func deleteData(id: String) {
         var allRecipe = [SavePicture]()
-        let coreDataStack = CoreDataStack()
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<SavePicture> = SavePicture.fetchRequest()
         
@@ -60,7 +59,7 @@ class CoreDataManager {
         }
     }
     
-    func search(id: String, allData: [SavePicture]) -> SavePicture {
+    private func search(id: String, allData: [SavePicture]) -> SavePicture {
         return allData.filter({ return String($0.idSave ?? "").lowercased().contains(id.lowercased()) })[0]
     }
     

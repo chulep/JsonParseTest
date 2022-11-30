@@ -11,7 +11,7 @@ protocol DetailViewModelType {
     var name: String { get }
     var description: String { get }
     var date: String { get }
-    var url: String { get }
-    init(networkFetcher: NetworkFetcher, result: Results)
+    var url: String? { get }
+    init(networkFetcher: NetworkFetcher, result: DomainModel)
     func getImage(completion: @escaping (Data?) -> Void)
 }

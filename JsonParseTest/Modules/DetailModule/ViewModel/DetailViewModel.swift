@@ -12,18 +12,18 @@ class DetailViewModel: DetailViewModelType {
     var name: String
     var description: String
     var date: String
-    var url: String
+    var url: String?
     
     private var networkFetcher: NetworkFetcher?
     
     //MARK: - Init
     
-    required init(networkFetcher: NetworkFetcher, result: Results) {
+    required init(networkFetcher: NetworkFetcher, result: DomainModel) {
         self.networkFetcher = networkFetcher
-        self.url = result.urls.full
-        self.name = "Name: " + (result.user?.username ?? "")
+        self.url = result.imageUrlFull
+        self.name = "Name: " + (result.name ?? "")
         self.description = "Description: " + (result.description ?? "")
-        self.date = "Date: " + (result.created_at ?? "")
+        self.date = "Date: " + (result.date ?? "")
     }
     
     //MARK: - Methods

@@ -11,7 +11,7 @@ final class NetworkFetcher {
 
     //MARK: - Logic
     
-    func getModel(searchText: String, completion: @escaping (Result<[Model]?, Error>) -> Void) {
+    func getModel(searchText: String, completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
         let request = createRequest(searchText: searchText)
         
         NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, Error>) in

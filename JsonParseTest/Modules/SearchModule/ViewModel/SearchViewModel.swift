@@ -9,7 +9,7 @@ import Foundation
 
 class SearchViewModel: SearchViewModelType {
 
-    var result: UnsplashModel?
+    var result: [DomainModel]?
     let networkFetcher: NetworkFetcher
     
     //MARK: - Init
@@ -33,13 +33,13 @@ class SearchViewModel: SearchViewModelType {
     }
     
     func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellViewModelType? {
-        guard let result = result?.results[indexPath.row] else { return nil }
+        guard let result = result?[indexPath.row] else { return nil }
         let cellPresenter = PhotoCellViewModel(result: result, networkFetcher: networkFetcher)
         return cellPresenter
     }
     
     func createDetailPresenter(indexPath: IndexPath) -> DetailViewModelType? {
-        guard let result = result?.results[indexPath.row] else { return nil }
+        guard let result = result?[indexPath.row] else { return nil }
         let detailPresenter = DetailViewModel(networkFetcher: networkFetcher, result: result)
         return detailPresenter
     }
