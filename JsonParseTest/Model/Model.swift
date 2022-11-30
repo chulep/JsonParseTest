@@ -8,15 +8,10 @@
 import Foundation
 
 struct Model {
-    let id: String
+    let id: String?
     let name: String?
     let date: String?
     let description: String?
     let imageData: Data?
-    let imageUrl: sizeUrl
-}
-
-struct sizeUrl {
-    let full: String
-    let small: String
+    let imageUrlFull: String?
 }

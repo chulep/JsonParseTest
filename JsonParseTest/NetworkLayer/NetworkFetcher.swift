@@ -11,10 +11,17 @@ final class NetworkFetcher {
 
     //MARK: - Logic
     
-    func getModel(searchText: String, completion: @escaping (Result<UnsplashModel?, Error>) -> Void) {
+    func getModel(searchText: String, completion: @escaping (Result<[Model]?, Error>) -> Void) {
         let request = createRequest(searchText: searchText)
         
-        NetworkManager.execute.getModelTask(request: request, completion: completion)
+        NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, Error>) in
+            switch result {
+            case .success(let data):
+                completion(.success(data?.results.map { $0.domain } ))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func getImage(url: String?, completion: @escaping (Data?) -> Void){

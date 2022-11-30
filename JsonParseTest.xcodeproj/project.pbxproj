@@ -15,6 +15,7 @@
 		5D1FCDB2291D457B00150DD1 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */; };
 		5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */; };
 		5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91C6162921403100705E62 /* FavoriteViewController.swift */; };
+		5D9EC88A2937124E00B1CDE5 /* CoreDataModel+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EC8892937124E00B1CDE5 /* CoreDataModel+Mappable.swift */; };
 		5DC3F0D42920D2F400A6897D /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */; };
 		5DE6619B2923B3210087DBAE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619A2923B3200087DBAE /* CoreDataStack.swift */; };
 		5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */; };
@@ -47,6 +48,7 @@
 		5D1FCDB1291D457B00150DD1 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5D91C6162921403100705E62 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		5D9EC8892937124E00B1CDE5 /* CoreDataModel+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataModel+Mappable.swift"; sourceTree = "<group>"; };
 		5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		5DE6619A2923B3200087DBAE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				5DF84206291ABE4600E18817 /* JsonParseTest.xcdatamodeld */,
 				5DE6619A2923B3200087DBAE /* CoreDataStack.swift */,
 				5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */,
+				5D9EC8892937124E00B1CDE5 /* CoreDataModel+Mappable.swift */,
 			);
 			path = CoreDataLayer;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				5D159D342933B378009BF004 /* SearchProtocols.swift in Sources */,
 				5DE7B8A629366F8A007B3FE6 /* DetailViewModelType.swift in Sources */,
 				5DF84215291ABE5B00E18817 /* NetworkFetcher.swift in Sources */,
+				5D9EC88A2937124E00B1CDE5 /* CoreDataModel+Mappable.swift in Sources */,
 				5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */,
 				5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */,
 				5DF84208291ABE4600E18817 /* JsonParseTest.xcdatamodeld in Sources */,
