@@ -9,12 +9,12 @@ import Foundation
 
 class PhotoCellViewModel: PhotoCellViewModelType {
     
-    let result: DomainModel
-    let networkfetcher: NetworkFetcher
+    var result: DomainModel
+    let networkfetcher: NetworkFetcher?
     
     //MARK: - init
     
-    required init(result: DomainModel, networkFetcher: NetworkFetcher) {
+    required init(result: DomainModel, networkFetcher: NetworkFetcher?) {
         self.result = result
         self.networkfetcher = networkFetcher
     }
@@ -22,7 +22,7 @@ class PhotoCellViewModel: PhotoCellViewModelType {
     //MARK: - Methods
     
     func getDownloadImage(completion: @escaping (Data?) -> Void) {
-        networkfetcher.getImage(url: result.imageUrlSmall, completion: completion)
+        networkfetcher?.getImage(url: result.imageUrlSmall, completion: completion)
     }
     
 }

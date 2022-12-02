@@ -15,6 +15,6 @@ protocol SearchViewModelType {
 }
 
 protocol PhotoCellViewModelType {
-    init(result: DomainModel, networkFetcher: NetworkFetcher)
+    init(result: DomainModel, networkFetcher: NetworkFetcher?)
     func getDownloadImage(completion: @escaping (Data?) -> Void)
 }

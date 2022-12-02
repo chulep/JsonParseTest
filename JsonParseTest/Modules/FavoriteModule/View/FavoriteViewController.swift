@@ -29,6 +29,10 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         setupSelf()
         addSubviews()
         setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setData()
     }
     
@@ -80,8 +84,9 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController()
-        //detailViewController.result = photos?.results[indexPath.row]
+        let network = NetworkFetcher()
+        let vm = DetailViewModel(networkFetcher: network, result: (viewModel?.pictureArray?[indexPath.row])!)
+        let detailViewController = DetailViewController(presenter: vm)
         let navController = UINavigationController(rootViewController: detailViewController)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
@@ -89,6 +94,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
+        cell.viewModel = viewModel?.createCellViewModel(indexPath: indexPath)
         return cell
     }
     

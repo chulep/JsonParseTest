@@ -19,7 +19,8 @@ final class ModuleBuilder {
     
     static func createFavoriteModule() -> UIViewController {
         let coreDataManager = CoreDataManager()
-        let viewModel = FavoriteViewModel(coreDataManager: coreDataManager)
+        let networkFetcher = NetworkFetcher()
+        let viewModel = FavoriteViewModel(coreDataManager: coreDataManager, networkFetcher: networkFetcher)
         let viewController = FavoriteViewController(viewModel: viewModel)
         return viewController
     }

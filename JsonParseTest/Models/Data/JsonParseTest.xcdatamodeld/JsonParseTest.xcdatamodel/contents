@@ -4,9 +4,9 @@
         <attribute name="dateSave" optional="YES" attributeType="String"/>
         <attribute name="descriptionSave" optional="YES" attributeType="String"/>
         <attribute name="idSave" optional="YES" attributeType="String"/>
-        <attribute name="imageSave" optional="YES" attributeType="Binary"/>
         <attribute name="nameSave" optional="YES" attributeType="String"/>
-        <attribute name="urlSave" optional="YES" attributeType="String"/>
+        <attribute name="urlFullSave" optional="YES" attributeType="String"/>
+        <attribute name="urlSmallSave" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="SavePicture" positionX="-63" positionY="-18" width="128" height="119"/>
