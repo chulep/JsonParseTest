@@ -7,7 +7,12 @@
 
 import Foundation
 
-final class NetworkFetcher {
+protocol NetworkFetcherType {
+    func getModel(searchText: String, completion: @escaping (Result<[DomainModel]?, Error>) -> Void)
+    func getImage(url: String?, completion: @escaping (Data?) -> Void)
+}
+
+final class NetworkFetcher: NetworkFetcherType {
 
     //MARK: - Logic
     
@@ -24,7 +29,7 @@ final class NetworkFetcher {
         }
     }
     
-    func getImage(url: String?, completion: @escaping (Data?) -> Void){
+    func getImage(url: String?, completion: @escaping (Data?) -> Void) {
         guard let urlString = url,
         let url = URL(string: urlString) else { return completion(nil) }
         

@@ -29,6 +29,10 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         setupSelf()
         addSubviews()
         setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setData()
     }
     
@@ -45,7 +49,7 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
+        collectionView.register(PictureCell.self, forCellWithReuseIdentifier: PictureCell.identifire)
     }
     
     private func createCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
@@ -80,15 +84,18 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController()
-        //detailViewController.result = photos?.results[indexPath.row]
+        let network = NetworkFetcher()
+        let coreData = CoreDataFetcher()
+        let vm = DetailViewModel(result: (viewModel?.pictureArray?[indexPath.row])!, networkFetcher: network, coreDataFetcher: coreData)
+        let detailViewController = DetailViewController(viewModel: vm)
         let navController = UINavigationController(rootViewController: detailViewController)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.identifire, for: indexPath) as! PictureCell
+        cell.viewModel = viewModel?.createCellViewModel(indexPath: indexPath)
         return cell
     }
     

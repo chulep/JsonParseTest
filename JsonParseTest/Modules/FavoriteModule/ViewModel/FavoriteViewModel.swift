@@ -11,12 +11,14 @@ final class FavoriteViewModel: FavoriteViewModelType {
     
     var pictureArray: [DomainModel]?
     
-    private let coreDataManager: CoreDataManager
+    private let coreDataManager: CoreDataFetcherType
+    private let networkFetcher: NetworkFetcherType
     
     //MARK: - Init
     
-    required init(coreDataManager: CoreDataManager) {
+    required init(coreDataManager: CoreDataFetcherType, networkFetcher: NetworkFetcherType) {
         self.coreDataManager = coreDataManager
+        self.networkFetcher = networkFetcher
     }
     
     //MARK: - Methods
@@ -31,6 +33,11 @@ final class FavoriteViewModel: FavoriteViewModelType {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
+        guard let data = pictureArray?[indexPath.row] else { return nil }
+        return PictureCellViewModel(result: data, networkFetcher: networkFetcher)
     }
     
 }

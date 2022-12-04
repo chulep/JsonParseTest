@@ -18,10 +18,18 @@ final class ModuleBuilder {
     }
     
     static func createFavoriteModule() -> UIViewController {
-        let coreDataManager = CoreDataManager()
-        let viewModel = FavoriteViewModel(coreDataManager: coreDataManager)
+        let coreDataFetcher = CoreDataFetcher()
+        let networkFetcher = NetworkFetcher()
+        let viewModel = FavoriteViewModel(coreDataManager: coreDataFetcher, networkFetcher: networkFetcher)
         let viewController = FavoriteViewController(viewModel: viewModel)
         return viewController
+    }
+    
+    static func createDetailMpdule(viewModel: DetailViewModelType?) -> UINavigationController {
+        let viewController = DetailViewController(viewModel: viewModel)
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .fullScreen
+        return navController
     }
 
 }

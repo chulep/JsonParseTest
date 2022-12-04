@@ -7,14 +7,14 @@
 
 import Foundation
 
-class PhotoCellViewModel: PhotoCellViewModelType {
+class PictureCellViewModel: PictureCellViewModelType {
     
-    let result: DomainModel
-    let networkfetcher: NetworkFetcher
+    var result: DomainModel
+    let networkfetcher: NetworkFetcherType?
     
     //MARK: - init
     
-    required init(result: DomainModel, networkFetcher: NetworkFetcher) {
+    required init(result: DomainModel, networkFetcher: NetworkFetcherType?) {
         self.result = result
         self.networkfetcher = networkFetcher
     }
@@ -22,7 +22,7 @@ class PhotoCellViewModel: PhotoCellViewModelType {
     //MARK: - Methods
     
     func getDownloadImage(completion: @escaping (Data?) -> Void) {
-        networkfetcher.getImage(url: result.imageUrlSmall, completion: completion)
+        networkfetcher?.getImage(url: result.imageUrlSmall, completion: completion)
     }
     
 }

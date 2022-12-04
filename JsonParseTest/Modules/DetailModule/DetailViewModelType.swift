@@ -12,6 +12,9 @@ protocol DetailViewModelType {
     var description: String { get }
     var date: String { get }
     var url: String? { get }
-    init(networkFetcher: NetworkFetcher, result: DomainModel)
+    var favorite: Bool { get set } 
+    init(result: DomainModel, networkFetcher: NetworkFetcherType, coreDataFetcher: CoreDataFetcherType)
     func getImage(completion: @escaping (Data?) -> Void)
+    func saveFavorite()
+    func barButtonImageName() -> String
 }

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+final class PictureCell: UICollectionViewCell, PictureCellType {
     
     static let identifire = "idCell"
-    var viewModel: PhotoCellViewModelType?
+    var viewModel: PictureCellViewModelType?
     
     //MARK: - UI Elements
     

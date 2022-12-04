@@ -9,15 +9,16 @@ import CoreData
 
 class CoreDataManager {
     
+    static let execute = CoreDataManager()
     private let coreDataStack = CoreDataStack()
     
-    func getData(completion: @escaping (Result<[DomainModel], Error>) -> Void) {
+    func getData<T: NSManagedObject>(completion: @escaping (Result<[T]?, Error>) -> Void) {
         let context = coreDataStack.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<SavePicture> = SavePicture.fetchRequest()
+        let fetchRequest = T.fetchRequest()
         
         do {
-            let data = try context.fetch(fetchRequest)
-            completion(.success(data.map { $0.domain } ))
+            let data = try context.fetch(fetchRequest) as? [T]
+            completion(.success(data))
             print("ExportCoreData DONE")
         } catch {
             completion(.failure(error))
@@ -25,16 +26,17 @@ class CoreDataManager {
         }
     }
     
-    func saveData(id: String?, url: String?, name: String?, description: String?, date: String?, image: Data?) {
+    func saveData(data: DomainModel?) {
+        guard let data = data else { return }
         let context = coreDataStack.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "RecipeData", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: "SavePicture", in: context)
         let object = NSManagedObject(entity: entity!, insertInto: context) as? SavePicture
-        object?.idSave = id
-        object?.nameSave = name
-        object?.descriptionSave = description
-        object?.dateSave = date
-        object?.urlSave = url
-        object?.imageSave = image
+        object?.idSave = data.id
+        object?.nameSave = data.name
+        object?.descriptionSave = data.description
+        object?.dateSave = data.date
+        object?.urlFullSave = data.imageUrlFull
+        object?.urlSmallSave = data.imageUrlSmall
         
         do {
             try context.save()
@@ -44,7 +46,8 @@ class CoreDataManager {
         }
     }
     
-    func deleteData(id: String) {
+    func deleteData(data: DomainModel?) {
+        guard let id = data?.id else { return }
         var allRecipe = [SavePicture]()
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<SavePicture> = SavePicture.fetchRequest()
@@ -62,5 +65,4 @@ class CoreDataManager {
     private func search(id: String, allData: [SavePicture]) -> SavePicture {
         return allData.filter({ return String($0.idSave ?? "").lowercased().contains(id.lowercased()) })[0]
     }
-    
 }

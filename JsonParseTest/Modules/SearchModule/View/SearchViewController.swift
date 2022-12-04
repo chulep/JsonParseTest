@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifire)
+        collectionView.register(PictureCell.self, forCellWithReuseIdentifier: PictureCell.identifire)
     }
     
     private func downloadData(searchText: String) {
@@ -87,11 +87,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailPresenter = viewModel?.createDetailPresenter(indexPath: indexPath)
-        let detailViewController = DetailViewController(presenter: detailPresenter)
-        let navController = UINavigationController(rootViewController: detailViewController)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
+        let detailViewModel = viewModel?.createDetailViewModel(indexPath: indexPath)
+        present(ModuleBuilder.createDetailMpdule(viewModel: detailViewModel), animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -100,8 +97,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     //data sourse
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifire, for: indexPath) as! PhotoCollectionViewCell
-        cell.viewModel = viewModel?.createPhotoCellPresenter(indexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.identifire, for: indexPath) as! PictureCell
+        let cellViewModel = viewModel?.createPhotoCellViewModel(indexPath: indexPath)
+        cell.viewModel = cellViewModel
         return cell
     }
 }

@@ -38,9 +38,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     
     //MARK: - Init
     
-    convenience init(presenter: DetailViewModelType?) {
+    convenience init(viewModel: DetailViewModelType?) {
         self.init(nibName: nil, bundle: nil)
-        self.viewModel = presenter
+        self.viewModel = viewModel
     }
     
     //MARK: - Lifecycle
@@ -90,7 +90,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         navigationController?.navigationBar.tintColor = .systemGray
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelDetail))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(saveToFavorites)),
+            UIBarButtonItem(image: UIImage(systemName: viewModel!.barButtonImageName()), style: .plain, target: self, action: #selector(saveToFavorites)),
             UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
     }
     
@@ -141,7 +141,8 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     }
     
     @objc private func saveToFavorites() {
-
+        viewModel?.saveFavorite()
+        addNavigationItem()
     }
     
     @objc private func sharePhoto() {
