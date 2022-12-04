@@ -38,9 +38,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     
     //MARK: - Init
     
-    convenience init(presenter: DetailViewModelType?) {
+    convenience init(viewModel: DetailViewModelType?) {
         self.init(nibName: nil, bundle: nil)
-        self.viewModel = presenter
+        self.viewModel = viewModel
     }
     
     //MARK: - Lifecycle

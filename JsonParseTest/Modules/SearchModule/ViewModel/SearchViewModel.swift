@@ -32,15 +32,16 @@ class SearchViewModel: SearchViewModelType {
         }
     }
     
-    func createPhotoCellPresenter(indexPath: IndexPath) -> PhotoCellViewModelType? {
+    func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let cellPresenter = PhotoCellViewModel(result: result, networkFetcher: networkFetcher)
+        let cellPresenter = PictureCellViewModel(result: result, networkFetcher: networkFetcher)
         return cellPresenter
     }
     
-    func createDetailPresenter(indexPath: IndexPath) -> DetailViewModelType? {
+    func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let detailPresenter = DetailViewModel(networkFetcher: networkFetcher, result: result)
+        let coreData = CoreDataFetcher()
+        let detailPresenter = DetailViewModel(result: result, networkFetcher: networkFetcher, coreDataFetcher: coreData)
         return detailPresenter
     }
     

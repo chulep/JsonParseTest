@@ -7,14 +7,14 @@
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+final class PictureCell: UICollectionViewCell, PictureCellType {
     
     static let identifire = "idCell"
-    var viewModel: PhotoCellViewModelType?
+    var viewModel: PictureCellViewModelType?
     
     //MARK: - UI Elements
     
-    let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         return $0

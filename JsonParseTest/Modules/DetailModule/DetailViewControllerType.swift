@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DetailViewControllerType {
-    init(presenter: DetailViewModelType?)
+    init(viewModel: DetailViewModelType?)
 }

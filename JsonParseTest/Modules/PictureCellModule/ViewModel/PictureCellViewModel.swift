@@ -7,14 +7,14 @@
 
 import Foundation
 
-class PhotoCellViewModel: PhotoCellViewModelType {
+class PictureCellViewModel: PictureCellViewModelType {
     
     var result: DomainModel
-    let networkfetcher: NetworkFetcher?
+    let networkfetcher: NetworkFetcherType?
     
     //MARK: - init
     
-    required init(result: DomainModel, networkFetcher: NetworkFetcher?) {
+    required init(result: DomainModel, networkFetcher: NetworkFetcherType?) {
         self.result = result
         self.networkfetcher = networkFetcher
     }
