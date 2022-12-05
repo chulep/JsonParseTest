@@ -17,7 +17,6 @@ class DetailViewModel: DetailViewModelType {
     
     private var detail: DomainModel?
     private var repository: RepositoryType?
-    private var coreData: CoreDataFetcherType?
     
     //MARK: - Init
     
@@ -35,14 +34,14 @@ class DetailViewModel: DetailViewModelType {
     //MARK: - Methods
     
     func getImage(completion: @escaping (Data?) -> Void) {
-        repository?.getImageNetwork(url: url, completion: completion)
+        repository?.getRemoteImage(url: url, completion: completion)
     }
     
     func saveFavorite() {
         if favorite == false {
-            coreData?.saveData(data: detail)
+            repository?.saveLocalFavorite(data: detail)
         } else {
-            coreData?.deleteData(data: detail)
+            repository?.deleteLocalFavorite(data: detail)
         }
         
         favorite = !favorite
@@ -58,7 +57,7 @@ class DetailViewModel: DetailViewModelType {
     }
     
     private func checkFavorite() {
-        coreData?.getData { result in
+        repository?.getLocalData { result in
             switch result {
                 
             case .success(let data):

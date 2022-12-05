@@ -22,7 +22,7 @@ final class FavoriteViewModel: FavoriteViewModelType {
     //MARK: - Methods
     
     func getData(completion: @escaping (Result<(), Error>) -> Void) {
-        repository.getCoreData { [weak self] result in
+        repository.getLocalData { [weak self] result in
             switch result {
             case .success(let data):
                 self?.pictureArray = data

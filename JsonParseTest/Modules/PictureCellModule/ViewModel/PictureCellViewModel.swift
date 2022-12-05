@@ -22,7 +22,7 @@ class PictureCellViewModel: PictureCellViewModelType {
     //MARK: - Methods
     
     func getDownloadImage(completion: @escaping (Data?) -> Void) {
-        repository?.getImageNetwork(url: result.imageUrlSmall, completion: completion)
+        repository?.getRemoteImage(url: result.imageUrlSmall, completion: completion)
     }
     
 }

@@ -7,19 +7,11 @@
 
 import Foundation
 
-protocol RepositoryType {
-    func getDataNetwork(searchText: String, completion: @escaping (Result<[DomainModel]?, Error>) -> Void)
-    func getImageNetwork(url: String?, completion: @escaping (Data?) -> Void)
-    func getCoreData(completion: @escaping (Result<[DomainModel]?, Error>) -> Void)
-    func saveFavoriteCoreData(data: DomainModel?)
-    func deleteFavoriteCoreData(data: DomainModel?)
-}
-
 final class Repository: RepositoryType {
     
     //MARK: - Network
     
-    func getDataNetwork(searchText: String, completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
+    func getRemoteData(searchText: String, completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
         let request = createRequest(searchText: searchText)
         
         NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, Error>) in
@@ -32,7 +24,7 @@ final class Repository: RepositoryType {
         }
     }
     
-    func getImageNetwork(url: String?, completion: @escaping (Data?) -> Void) {
+    func getRemoteImage(url: String?, completion: @escaping (Data?) -> Void) {
         guard let urlString = url,
         let url = URL(string: urlString) else { return completion(nil) }
         
@@ -41,8 +33,8 @@ final class Repository: RepositoryType {
     
     //MARK: - CoreData
     
-    func getCoreData(completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
-        CoreDataManager.execute.getData { (result: Result<[SavePicture]?, Error>) in
+    func getLocalData(completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
+        CoreDataManager.execute.getDataTask { (result: Result<[SavePicture]?, Error>) in
             switch result {
             case .success(let data):
                 completion(.success(data?.map { $0.domain }))
@@ -52,12 +44,12 @@ final class Repository: RepositoryType {
         }
     }
     
-    func saveFavoriteCoreData(data: DomainModel?) {
-        CoreDataManager.execute.saveData(data: data)
+    func saveLocalFavorite(data: DomainModel?) {
+        CoreDataManager.execute.saveDataTask(data: data)
     }
     
-    func deleteFavoriteCoreData(data: DomainModel?) {
-        CoreDataManager.execute.deleteData(data: data)
+    func deleteLocalFavorite(data: DomainModel?) {
+        CoreDataManager.execute.deleteDataTask(data: data)
     }
     
     

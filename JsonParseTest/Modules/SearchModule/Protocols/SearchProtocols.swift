@@ -13,3 +13,7 @@ protocol SearchViewModelType {
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType?
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType?
 }
+
+protocol SearchViewControllerType {
+    init(viewModel: SearchViewModelType)
+}

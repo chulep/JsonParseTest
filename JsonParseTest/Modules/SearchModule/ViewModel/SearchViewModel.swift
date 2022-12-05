@@ -21,7 +21,7 @@ class SearchViewModel: SearchViewModelType {
     //MARK: - Methods
     
     func getDownloadData(searchText: String, completion: @escaping (Result<(), Error>) -> Void) {
-        repository.getDataNetwork(searchText: searchText) { result in
+        repository.getRemoteData(searchText: searchText) { result in
             switch result {
             case .success(let data):
                 self.result = data

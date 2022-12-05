@@ -13,3 +13,7 @@ protocol FavoriteViewModelType {
     func getData(completion: @escaping (Result<(), Error>) -> Void)
     func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType?
 }
+
+protocol FavoriteViewControllerType {
+    init(viewModel: FavoriteViewModelType)
+}

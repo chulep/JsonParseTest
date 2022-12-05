@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager {
+class NetworkManager: NetworkManagerType {
     
     static let execute = NetworkManager()
     
