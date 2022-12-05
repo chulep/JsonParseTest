@@ -16,14 +16,13 @@ class DetailViewModel: DetailViewModelType {
     var favorite: Bool
     
     private var detail: DomainModel?
-    private var networkFetcher: NetworkFetcherType?
+    private var repository: RepositoryType?
     private var coreData: CoreDataFetcherType?
     
     //MARK: - Init
     
-    required init(result: DomainModel, networkFetcher: NetworkFetcherType, coreDataFetcher: CoreDataFetcherType) {
-        self.networkFetcher = networkFetcher
-        self.coreData = coreDataFetcher
+    required init(result: DomainModel, repository: RepositoryType) {
+        self.repository = repository
         self.url = result.imageUrlFull
         self.name = "Name: " + (result.name ?? "-")
         self.description = "Description: " + (result.description ?? "-")
@@ -36,7 +35,7 @@ class DetailViewModel: DetailViewModelType {
     //MARK: - Methods
     
     func getImage(completion: @escaping (Data?) -> Void) {
-        networkFetcher?.getImage(url: url, completion: completion)
+        repository?.getImageNetwork(url: url, completion: completion)
     }
     
     func saveFavorite() {

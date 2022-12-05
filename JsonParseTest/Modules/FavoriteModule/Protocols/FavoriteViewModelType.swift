@@ -9,7 +9,7 @@ import Foundation
 
 protocol FavoriteViewModelType {
     var pictureArray: [DomainModel]? { get set }
-    init(coreDataManager: CoreDataFetcherType, networkFetcher: NetworkFetcherType)
+    init(repository: RepositoryType)
     func getData(completion: @escaping (Result<(), Error>) -> Void)
     func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType?
 }

@@ -10,18 +10,18 @@ import Foundation
 class SearchViewModel: SearchViewModelType {
 
     var result: [DomainModel]?
-    let networkFetcher: NetworkFetcher
+    let repository: RepositoryType
     
     //MARK: - Init
     
-    init(networkFetcher: NetworkFetcher) {
-        self.networkFetcher = networkFetcher
+    init(repository: RepositoryType) {
+        self.repository = repository
     }
     
     //MARK: - Methods
     
     func getDownloadData(searchText: String, completion: @escaping (Result<(), Error>) -> Void) {
-        networkFetcher.getModel(searchText: searchText) { result in
+        repository.getDataNetwork(searchText: searchText) { result in
             switch result {
             case .success(let data):
                 self.result = data
@@ -34,15 +34,14 @@ class SearchViewModel: SearchViewModelType {
     
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let cellPresenter = PictureCellViewModel(result: result, networkFetcher: networkFetcher)
-        return cellPresenter
+        let cellViewModel = PictureCellViewModel(result: result, repository: repository)
+        return cellViewModel
     }
     
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let coreData = CoreDataFetcher()
-        let detailPresenter = DetailViewModel(result: result, networkFetcher: networkFetcher, coreDataFetcher: coreData)
-        return detailPresenter
+        let detailViewModel = DetailViewModel(result: result, repository: repository)
+        return detailViewModel
     }
     
 }

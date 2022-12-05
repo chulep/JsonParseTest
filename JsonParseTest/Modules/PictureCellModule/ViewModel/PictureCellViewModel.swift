@@ -10,19 +10,19 @@ import Foundation
 class PictureCellViewModel: PictureCellViewModelType {
     
     var result: DomainModel
-    let networkfetcher: NetworkFetcherType?
+    let repository: RepositoryType?
     
     //MARK: - init
     
-    required init(result: DomainModel, networkFetcher: NetworkFetcherType?) {
+    required init(result: DomainModel, repository: RepositoryType?) {
         self.result = result
-        self.networkfetcher = networkFetcher
+        self.repository = repository
     }
     
     //MARK: - Methods
     
     func getDownloadImage(completion: @escaping (Data?) -> Void) {
-        networkfetcher?.getImage(url: result.imageUrlSmall, completion: completion)
+        repository?.getImageNetwork(url: result.imageUrlSmall, completion: completion)
     }
     
 }

@@ -7,14 +7,23 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
-    var viewModel: SearchViewModelType?
+    private var viewModel: SearchViewModelType?
     
     //MARK: - UI elements
     
-    var searchBar = UISearchBar()
-    lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createFlowLayout())
+    private var searchBar = UISearchBar()
+    
+    private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createFlowLayout())
+    
+    private var label: UILabel = {
+        $0.textColor = ColorHelper.lightGray
+        $0.text = "Введите запрос"
+        $0.textAlignment = .center
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    } (UILabel())
     
     //MARK: - Init
     
@@ -30,13 +39,21 @@ class SearchViewController: UIViewController {
         addSubviews()
         setupSearchBar()
         setupCollectionView()
-        downloadData(searchText: "text")
+        addConstraints()
     }
     
     //MARK: - Methods
     
+    private func addConstraints() {
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
     private func addSubviews() {
         view.addSubview(collectionView)
+        view.addSubview(label)
     }
     
     private func setupSearchBar() {
@@ -56,6 +73,7 @@ class SearchViewController: UIViewController {
                 switch result {
                 case .success(()):
                     self?.collectionView.reloadData()
+                    self?.label.isHidden = true
                 case .failure(_):
                     break
                 }
@@ -64,6 +82,7 @@ class SearchViewController: UIViewController {
     }
     
     //MARK: - Support Methods
+    
     private func hideKeyboard() {
         searchBar.endEditing(true)
     }

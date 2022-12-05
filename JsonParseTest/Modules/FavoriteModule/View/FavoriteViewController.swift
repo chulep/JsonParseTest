@@ -84,9 +84,8 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let network = NetworkFetcher()
-        let coreData = CoreDataFetcher()
-        let vm = DetailViewModel(result: (viewModel?.pictureArray?[indexPath.row])!, networkFetcher: network, coreDataFetcher: coreData)
+        let repository = Repository()
+        let vm = DetailViewModel(result: (viewModel?.pictureArray![indexPath.row])!, repository: repository)
         let detailViewController = DetailViewController(viewModel: vm)
         let navController = UINavigationController(rootViewController: detailViewController)
         navController.modalPresentationStyle = .fullScreen

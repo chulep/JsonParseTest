@@ -10,17 +10,16 @@ import UIKit
 final class ModuleBuilder {
     
     static func createSearchModule() -> UIViewController {
-        let networkFetcher = NetworkFetcher()
-        let viewModel = SearchViewModel(networkFetcher: networkFetcher)
+        let repository = Repository()
+        let viewModel = SearchViewModel(repository: repository)
         let viewController = SearchViewController(viewModel: viewModel)
         let navController = UINavigationController(rootViewController: viewController)
         return navController
     }
     
     static func createFavoriteModule() -> UIViewController {
-        let coreDataFetcher = CoreDataFetcher()
-        let networkFetcher = NetworkFetcher()
-        let viewModel = FavoriteViewModel(coreDataManager: coreDataFetcher, networkFetcher: networkFetcher)
+        let repository = Repository()
+        let viewModel = FavoriteViewModel(repository: repository)
         let viewController = FavoriteViewController(viewModel: viewModel)
         return viewController
     }

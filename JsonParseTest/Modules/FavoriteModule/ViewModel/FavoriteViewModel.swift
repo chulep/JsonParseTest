@@ -11,20 +11,18 @@ final class FavoriteViewModel: FavoriteViewModelType {
     
     var pictureArray: [DomainModel]?
     
-    private let coreDataManager: CoreDataFetcherType
-    private let networkFetcher: NetworkFetcherType
+    private let repository: RepositoryType
     
     //MARK: - Init
     
-    required init(coreDataManager: CoreDataFetcherType, networkFetcher: NetworkFetcherType) {
-        self.coreDataManager = coreDataManager
-        self.networkFetcher = networkFetcher
+    required init(repository: RepositoryType) {
+        self.repository = repository
     }
     
     //MARK: - Methods
     
     func getData(completion: @escaping (Result<(), Error>) -> Void) {
-        coreDataManager.getData { [weak self] result in
+        repository.getCoreData { [weak self] result in
             switch result {
             case .success(let data):
                 self?.pictureArray = data
@@ -37,7 +35,7 @@ final class FavoriteViewModel: FavoriteViewModelType {
     
     func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
         guard let data = pictureArray?[indexPath.row] else { return nil }
-        return PictureCellViewModel(result: data, networkFetcher: networkFetcher)
+        return PictureCellViewModel(result: data, repository: repository)
     }
     
 }

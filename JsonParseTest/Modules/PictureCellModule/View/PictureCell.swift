@@ -20,29 +20,45 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         return $0
     }(UIImageView())
     
-    //MARK: - Layout Subviews
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    //MARK: - Override
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = .gray
+        backgroundColor = ColorHelper.lightGray
+        addSubviews()
         setupUI()
         setImage()
     }
     
+    override var isHighlighted: Bool {
+        didSet {
+            alpha = isHighlighted ?  0.5 : 1
+        }
+    }
+    
     //MARK: - Methods
     
-    private func setupUI() {
+    private func addSubviews() {
         addSubview(imageView)
+        addSubview(activityIndicator)
+    }
+    
+    private func setupUI() {
+        activityIndicator.center = center
         imageView.frame = bounds
         layer.cornerRadius = ConstantHelper.radius
         clipsToBounds = true
     }
     
     private func setImage() {
+        activityIndicator.startAnimating()
         viewModel?.getDownloadImage(completion: { [weak self] data in
             guard let data = data,
             let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
                 self?.imageView.image = image
             }
         })
