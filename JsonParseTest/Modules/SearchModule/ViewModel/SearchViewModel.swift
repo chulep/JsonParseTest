@@ -40,7 +40,7 @@ class SearchViewModel: SearchViewModelType {
     
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let detailViewModel = DetailViewModel(result: result, repository: repository)
+        let detailViewModel = DetailViewModel(detailData: result, repository: repository)
         return detailViewModel
     }
     

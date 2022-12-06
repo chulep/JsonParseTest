@@ -8,5 +8,5 @@
 import UIKit
 
 final class ConstantHelper {
-    static let radius: CGFloat = 5
+    static let radius: CGFloat = 10
 }

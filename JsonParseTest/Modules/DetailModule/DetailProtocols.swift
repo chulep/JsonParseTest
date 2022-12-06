@@ -13,7 +13,7 @@ protocol DetailViewModelType {
     var date: String { get }
     var url: String? { get }
     var favorite: Bool { get set }
-    init(result: DomainModel, repository: RepositoryType)
+    init(detailData: DomainModel, repository: RepositoryType)
     func getImage(completion: @escaping (Data?) -> Void)
     func saveFavorite()
     func barButtonImageName() -> String

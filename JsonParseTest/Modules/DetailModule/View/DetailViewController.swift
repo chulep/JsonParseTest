@@ -29,8 +29,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         $0.axis = .vertical
         $0.backgroundColor = ColorHelper.lightGray
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.layoutMargins = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
+        $0.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         $0.isLayoutMarginsRelativeArrangement = true
+        $0.layer.cornerRadius = ConstantHelper.radius
         return $0
     }(UIStackView())
     
@@ -54,18 +55,12 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         setData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        descriptionStackView.layer.cornerRadius = descriptionStackView.bounds.height / 10
-        descriptionStackView.clipsToBounds = true
-    }
-    
     //MARK: - Add Subviews
     
     private func addSubviews() {
-        descriptionStackView.addArrangedSubview(dateLabel)
         descriptionStackView.addArrangedSubview(nameLebel)
         descriptionStackView.addArrangedSubview(descriptionLabel)
+        descriptionStackView.addArrangedSubview(dateLabel)
         
         view.addSubview(imageView)
         view.addSubview(descriptionStackView)

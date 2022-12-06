@@ -9,7 +9,7 @@ import Foundation
 
 extension Repository {
     
-    //MARK: - Supprot Methods
+    //MARK: - Support Methods
     
     internal func createRequest(searchText: String) -> URLRequest {
         let parameters = prepareParametrs(searchText: searchText)

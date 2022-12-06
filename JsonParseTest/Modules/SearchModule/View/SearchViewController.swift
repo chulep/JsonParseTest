@@ -17,9 +17,10 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createFlowLayout())
     
-    private var label: UILabel = {
+    private var alertLabel: UILabel = {
         $0.textColor = ColorHelper.lightGray
-        $0.text = "Введите запрос"
+        $0.text = NameHelper.searchTaskLabel
+        $0.numberOfLines = 2
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
@@ -36,6 +37,7 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSelf()
         addSubviews()
         setupSearchBar()
         setupCollectionView()
@@ -44,16 +46,22 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     //MARK: - Methods
     
+    private func setupSelf() {
+        view.backgroundColor = .white
+        navigationController?.tabBarItem.title = NameHelper.seacrhTabBarName
+        navigationController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+    }
+    
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
     private func addSubviews() {
         view.addSubview(collectionView)
-        view.addSubview(label)
+        view.addSubview(alertLabel)
     }
     
     private func setupSearchBar() {
@@ -73,7 +81,7 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
                 switch result {
                 case .success(()):
                     self?.collectionView.reloadData()
-                    self?.label.isHidden = true
+                    self?.alertLabel.isHidden = true
                 case .failure(_):
                     break
                 }
@@ -85,6 +93,7 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     private func hideKeyboard() {
         searchBar.endEditing(true)
+        searchBar.setShowsCancelButton(false, animated: true)
     }
     
     private func createFlowLayout() -> UICollectionViewFlowLayout {
@@ -107,7 +116,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewModel = viewModel?.createDetailViewModel(indexPath: indexPath)
-        present(ModuleBuilder.createDetailMpdule(viewModel: detailViewModel), animated: true)
+        present(ModuleBuilder.createDetailModule(viewModel: detailViewModel), animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -127,9 +136,18 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension SearchViewController: UISearchBarDelegate {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         downloadData(searchText: searchBar.text ?? "")
         hideKeyboard()
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
+    }
+
 }
 

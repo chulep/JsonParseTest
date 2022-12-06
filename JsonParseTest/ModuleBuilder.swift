@@ -9,22 +9,26 @@ import UIKit
 
 final class ModuleBuilder {
     
+    static func createStartTabBarModule() -> UITabBarController {
+        let searchVC = ModuleBuilder.createSearchModule()
+        let favoriteVC = ModuleBuilder.createFavoriteModule()
+        return TabBarController(viewControllers: [searchVC, favoriteVC])
+    }
+    
     static func createSearchModule() -> UIViewController {
         let repository = Repository()
         let viewModel = SearchViewModel(repository: repository)
         let viewController = SearchViewController(viewModel: viewModel)
-        let navController = UINavigationController(rootViewController: viewController)
-        return navController
+        return UINavigationController(rootViewController: viewController)
     }
     
     static func createFavoriteModule() -> UIViewController {
         let repository = Repository()
         let viewModel = FavoriteViewModel(repository: repository)
-        let viewController = FavoriteViewController(viewModel: viewModel)
-        return viewController
+        return FavoriteViewController(viewModel: viewModel)
     }
     
-    static func createDetailMpdule(viewModel: DetailViewModelType?) -> UINavigationController {
+    static func createDetailModule(viewModel: DetailViewModelType?) -> UINavigationController {
         let viewController = DetailViewController(viewModel: viewModel)
         let navController = UINavigationController(rootViewController: viewController)
         navController.modalPresentationStyle = .fullScreen

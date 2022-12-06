@@ -38,4 +38,9 @@ final class FavoriteViewModel: FavoriteViewModelType {
         return PictureCellViewModel(result: data, repository: repository)
     }
     
+    func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType? {
+        guard let data = pictureArray?[indexPath.row] else { return nil }
+        return DetailViewModel(detailData: data, repository: repository)
+    }
+    
 }

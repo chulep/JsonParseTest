@@ -20,13 +20,13 @@ class DetailViewModel: DetailViewModelType {
     
     //MARK: - Init
     
-    required init(result: DomainModel, repository: RepositoryType) {
+    required init(detailData: DomainModel, repository: RepositoryType) {
         self.repository = repository
-        self.url = result.imageUrlFull
-        self.name = "Name: " + (result.name ?? "-")
-        self.description = "Description: " + (result.description ?? "-")
-        self.date = "Date: " + (result.date ?? "-")
-        self.detail = result
+        self.url = detailData.imageUrlFull
+        self.name = NameHelper.author(name: detailData.name)
+        self.description = NameHelper.description(text: detailData.description)
+        self.date = NameHelper.date(text: detailData.date)
+        self.detail = detailData
         self.favorite = detail?.favorite ?? false
         self.checkFavorite()
     }
