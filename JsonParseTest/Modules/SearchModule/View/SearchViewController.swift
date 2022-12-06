@@ -19,12 +19,14 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     private var alertLabel: UILabel = {
         $0.textColor = ColorHelper.lightGray
-        $0.text = NameHelper.searchTaskLabel
+        $0.text = NameHelper.searchTaskLabel(resultCount: nil)
         $0.numberOfLines = 2
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     } (UILabel())
+    
+    private var activityIndicator = UIActivityIndicatorView(style: .medium)
     
     //MARK: - Init
     
@@ -53,15 +55,18 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     }
     
     private func addConstraints() {
+        activityIndicator.center = view.center
+        
         NSLayoutConstraint.activate([
             alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            alertLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            alertLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
     private func addSubviews() {
         view.addSubview(collectionView)
         view.addSubview(alertLabel)
+        view.addSubview(activityIndicator)
     }
     
     private func setupSearchBar() {
@@ -76,12 +81,15 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     }
     
     private func downloadData(searchText: String) {
+        activityIndicator.startAnimating()
+        alertLabel.isHidden = true
         viewModel?.getDownloadData(searchText: searchText, completion: { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(()):
                     self?.collectionView.reloadData()
-                    self?.alertLabel.isHidden = true
+                    self?.showAlertLabel()
+                    self?.activityIndicator.stopAnimating()
                 case .failure(_):
                     break
                 }
@@ -90,6 +98,15 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     }
     
     //MARK: - Support Methods
+    
+    private func showAlertLabel() {
+        alertLabel.text = NameHelper.searchTaskLabel(resultCount: viewModel?.result?.count)
+        if viewModel?.result == nil || viewModel?.result?.count == 0 {
+            alertLabel.isHidden = false
+        } else {
+            alertLabel.isHidden = true
+        }
+    }
     
     private func hideKeyboard() {
         searchBar.endEditing(true)

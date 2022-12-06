@@ -8,10 +8,17 @@
 import Foundation
 
 struct NameHelper {
-    static let searchTaskLabel = "Начните поиск\nЗдесь будет отображен результат"
     static let noFavoriteLabel = "Избранных картинок нет"
     static let seacrhTabBarName = "Поиск"
     static let favoriteTabBarName = "Избранное"
+    
+    static func searchTaskLabel(resultCount: Int?) -> String {
+        if resultCount == nil {
+            return "Начните поиск\nЗдесь появится результат"
+        } else {
+            return "Ничего не найдено\nУкажите другое название"
+        }
+    }
     
     static func author(name: String?) -> String {
         return "Автор: " + (name ?? "-")
@@ -22,17 +29,12 @@ struct NameHelper {
     }
     
     static func date(text: String?) -> String {
-        return "Дата: " + dateFormatter(text: text)
-    }
-    
-    //MARK: - Support Methods
-    
-    private static func dateFormatter(text: String?) -> String {
-        guard let text = text else { return "-" }
+        guard let text = text else { return "Дата: -" }
+        
         let format = DateFormatter()
         format.date(from: text)
         format.dateFormat = "dd.MM.YY"
-        let data = format.string(from: Date.init())
-        return data
+        let date = format.string(from: Date.init())
+        return "Дата: " + date
     }
 }

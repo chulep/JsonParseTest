@@ -46,8 +46,8 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
     }
     
     private func setupUI() {
-        activityIndicator.center = center
         imageView.frame = bounds
+        activityIndicator.center = imageView.center
         layer.cornerRadius = ConstantHelper.radius
         clipsToBounds = true
     }

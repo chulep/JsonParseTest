@@ -17,7 +17,7 @@ extension Repository {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.allHTTPHeaderFields = ["Authorization": "Client-ID 6tHmVwpe7J1hrFEV140Yl6lKnnt8T41eCLfThp3yKpc"]
+        request.allHTTPHeaderFields = ConstantHelper.keyApi
         
         return request
     }
