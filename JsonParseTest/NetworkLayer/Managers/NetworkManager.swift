@@ -11,26 +11,25 @@ class NetworkManager: NetworkManagerType {
     
     static let execute = NetworkManager()
     
-    func getModelTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, Error>) -> Void) {
+    func getModelTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data else { return completion(.success(nil)) }
+            if error != nil { return completion(.failure(NetworkError.uploadedFailed)) }
+            guard let data = data else { return completion(.failure(NetworkError.nothingFound)) }
 
             do {
                 try completion(.success(JSONDecoder().decode(T.self, from: data)))
-                print(data.count)
             } catch {
-                completion(.failure(error))
-                print(error.localizedDescription)
+                completion(.failure(NetworkError.parseFailed))
             }
         }.resume()
     }
     
     func getImageTask(url: URL, completion: @escaping (Data?) -> Void) {
         URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data else { return completion(nil) }
             completion(data)
         }.resume()
     }
+    
     
     
 }

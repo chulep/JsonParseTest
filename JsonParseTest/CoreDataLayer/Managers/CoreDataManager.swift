@@ -21,7 +21,7 @@ class CoreDataManager: CoreDataManagerType {
             completion(.success(data))
             print("ExportCoreData DONE")
         } catch {
-            completion(.failure(error))
+            completion(.failure(CoreDataError.parseFailed))
             print("ExportCoreData ERROR")
         }
     }

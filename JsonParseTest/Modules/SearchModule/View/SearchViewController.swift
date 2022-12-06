@@ -19,7 +19,7 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     private var alertLabel: UILabel = {
         $0.textColor = ColorHelper.lightGray
-        $0.text = NameHelper.searchTaskLabel(resultCount: nil)
+        $0.text = NameHelper.searchAlertLabel
         $0.numberOfLines = 2
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +54,12 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
         navigationController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
     }
     
+    private func addSubviews() {
+        view.addSubview(collectionView)
+        view.addSubview(alertLabel)
+        view.addSubview(activityIndicator)
+    }
+    
     private func addConstraints() {
         activityIndicator.center = view.center
         
@@ -61,12 +67,6 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
             alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
-    }
-    
-    private func addSubviews() {
-        view.addSubview(collectionView)
-        view.addSubview(alertLabel)
-        view.addSubview(activityIndicator)
     }
     
     private func setupSearchBar() {
@@ -83,15 +83,17 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     private func downloadData(searchText: String) {
         activityIndicator.startAnimating()
         alertLabel.isHidden = true
+        collectionView.isHidden = true
         viewModel?.getDownloadData(searchText: searchText, completion: { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(()):
                     self?.collectionView.reloadData()
-                    self?.showAlertLabel()
+                    self?.collectionView.isHidden = false
                     self?.activityIndicator.stopAnimating()
-                case .failure(_):
-                    break
+                case .failure(let error):
+                    self?.errorHandler(error: error)
+                    self?.activityIndicator.stopAnimating()
                 }
             }
         })
@@ -99,12 +101,15 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     //MARK: - Support Methods
     
-    private func showAlertLabel() {
-        alertLabel.text = NameHelper.searchTaskLabel(resultCount: viewModel?.result?.count)
-        if viewModel?.result == nil || viewModel?.result?.count == 0 {
+    private func errorHandler(error: NetworkError) {
+        switch error {
+        case .uploadedFailed:
+            present(UIAlertController.createErrorAlert(message: error.rawValue), animated: true)
+        case .nothingFound:
+            alertLabel.text = error.rawValue
             alertLabel.isHidden = false
-        } else {
-            alertLabel.isHidden = true
+        case .parseFailed:
+            present(UIAlertController.createErrorAlert(message: error.rawValue), animated: true)
         }
     }
     

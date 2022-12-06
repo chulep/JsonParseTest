@@ -9,7 +9,7 @@ import Foundation
 
 protocol SearchViewModelType {
     var result: [DomainModel]? { get set }
-    func getDownloadData(searchText: String, completion: @escaping (Result<(), Error>) -> Void)
+    func getDownloadData(searchText: String, completion: @escaping (Result<(), NetworkError>) -> Void)
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType?
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType?
 }

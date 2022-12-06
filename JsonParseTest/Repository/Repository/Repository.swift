@@ -11,12 +11,13 @@ final class Repository: RepositoryType {
     
     //MARK: - Network
     
-    func getRemoteData(searchText: String, completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
+    func getRemoteData(searchText: String, completion: @escaping (Result<[DomainModel]?, NetworkError>) -> Void) {
         let request = createRequest(searchText: searchText)
         
-        NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, Error>) in
+        NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, NetworkError>) in
             switch result {
             case .success(let data):
+                if data?.total == 0 { return completion(.failure(NetworkError.nothingFound))}
                 completion(.success(data?.results.map { $0.domain } ))
             case .failure(let error):
                 completion(.failure(error))

@@ -8,6 +8,6 @@
 import Foundation
 
 protocol NetworkManagerType {
-    func getModelTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, Error>) -> Void)
+    func getModelTask<T: Decodable>(request: URLRequest, completion: @escaping (Result<T?, NetworkError>) -> Void)
     func getImageTask(url: URL, completion: @escaping (Data?) -> Void)
 }

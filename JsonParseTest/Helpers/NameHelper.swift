@@ -12,13 +12,7 @@ struct NameHelper {
     static let seacrhTabBarName = "Поиск"
     static let favoriteTabBarName = "Избранное"
     
-    static func searchTaskLabel(resultCount: Int?) -> String {
-        if resultCount == nil {
-            return "Начните поиск\nЗдесь появится результат"
-        } else {
-            return "Ничего не найдено\nУкажите другое название"
-        }
-    }
+    static let searchAlertLabel = "Начните поиск\nЗдесь появится результат"
     
     static func author(name: String?) -> String {
         return "Автор: " + (name ?? "-")
