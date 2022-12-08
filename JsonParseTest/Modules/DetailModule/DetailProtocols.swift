@@ -15,8 +15,7 @@ protocol DetailViewModelType {
     var favorite: Bool { get set }
     init(detailData: DomainModel, repository: RepositoryType)
     func getImage(completion: @escaping (Data?) -> Void)
-    func saveFavorite()
-    func barButtonImageName() -> String
+    func saveFavorite(completion: @escaping (CoreDataError?) -> Void)
 }
 
 protocol DetailViewControllerType {

@@ -85,7 +85,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         navigationController?.navigationBar.tintColor = .systemGray
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelDetail))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: viewModel!.barButtonImageName()), style: .plain, target: self, action: #selector(saveToFavorites)),
+            UIBarButtonItem(image: UIImage().createFavoriteImage(viewModel?.favorite), style: .plain, target: self, action: #selector(saveToFavorites)),
             UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
     }
     
@@ -103,7 +103,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
                 let image = UIImage(data: data) else { return }
                 self.imageView.image = image
                 self.activityIndicator.stopAnimating()
-                self.descriptionAutoHide()
+                self.descriptionStackView.disappearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
             }
         })
     }
@@ -116,17 +116,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     }
     
     @objc private func descriptionTapHide() {
-        UIView.animate(withDuration: 0.2) {
-            self.descriptionStackView.alpha == 1 ? (self.descriptionStackView.alpha = 0) : (self.descriptionStackView.alpha = 1)
-        }
-    }
-    
-    private func descriptionAutoHide() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            UIView.animate(withDuration: 0.2) {
-                self.descriptionStackView.alpha = 0
-            }
-        }
+        descriptionStackView.appearForAlpha(descriptionStackView.alpha, withDuration: 0.2)
     }
     
     //MARK: - Other Methods
@@ -136,7 +126,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     }
     
     @objc private func saveToFavorites() {
-        viewModel?.saveFavorite()
+        viewModel?.saveFavorite(completion: { [weak self] error in
+            if let error = error { self?.present(UIAlertController.createErrorAlert(message: error.rawValue), animated: true) }
+        })
         addNavigationItem()
     }
     

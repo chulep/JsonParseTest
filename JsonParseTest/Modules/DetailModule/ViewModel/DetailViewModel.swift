@@ -37,23 +37,13 @@ class DetailViewModel: DetailViewModelType {
         repository?.getRemoteImage(url: url, completion: completion)
     }
     
-    func saveFavorite() {
+    func saveFavorite(completion: @escaping (CoreDataError?) -> Void) {
         if favorite == false {
-            repository?.saveLocalFavorite(data: detail)
+            repository?.saveLocalFavorite(data: detail, completion: completion)
         } else {
-            repository?.deleteLocalFavorite(data: detail)
+            repository?.deleteLocalFavorite(data: detail, completion: completion)
         }
-        
         favorite = !favorite
-    }
-    
-    func barButtonImageName() -> String {
-        switch favorite {
-        case true:
-            return "heart.fill"
-        case false:
-            return "heart"
-        }
     }
     
     private func checkFavorite() {

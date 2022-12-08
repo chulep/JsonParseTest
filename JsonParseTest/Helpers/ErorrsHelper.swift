@@ -15,7 +15,6 @@ enum NetworkError: String, Error {
 
 enum CoreDataError: String, Error {
     case fetchFailed = "загрузки локальных данных"
-    case parseFailed = "открытия локальных данных"
     case deleteFailed = "удаления из избранного"
     case saveFailed = "добавления в избранное"
 }

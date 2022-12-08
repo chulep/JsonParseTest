@@ -34,8 +34,8 @@ final class Repository: RepositoryType {
     
     //MARK: - CoreData
     
-    func getLocalData(completion: @escaping (Result<[DomainModel]?, Error>) -> Void) {
-        CoreDataManager.execute.getDataTask { (result: Result<[SavePicture]?, Error>) in
+    func getLocalData(completion: @escaping (Result<[DomainModel]?, CoreDataError>) -> Void) {
+        CoreDataManager.execute.getDataTask { (result: Result<[SavePicture]?, CoreDataError>) in
             switch result {
             case .success(let data):
                 completion(.success(data?.map { $0.domain }))
@@ -45,12 +45,12 @@ final class Repository: RepositoryType {
         }
     }
     
-    func saveLocalFavorite(data: DomainModel?) {
-        CoreDataManager.execute.saveDataTask(data: data)
+    func saveLocalFavorite(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void) {
+        CoreDataManager.execute.saveDataTask(data: data, completion: completion)
     }
     
-    func deleteLocalFavorite(data: DomainModel?) {
-        CoreDataManager.execute.deleteDataTask(data: data)
+    func deleteLocalFavorite(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void) {
+        CoreDataManager.execute.deleteDataTask(data: data, completion: completion)
     }
     
     

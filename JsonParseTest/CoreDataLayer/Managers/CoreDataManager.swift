@@ -12,7 +12,7 @@ class CoreDataManager: CoreDataManagerType {
     static let execute = CoreDataManager()
     private let coreDataStack = CoreDataStack()
     
-    func getDataTask<T: NSManagedObject>(completion: @escaping (Result<[T]?, Error>) -> Void) {
+    func getDataTask<T: NSManagedObject>(completion: @escaping (Result<[T]?, CoreDataError>) -> Void) {
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest = T.fetchRequest()
         
@@ -21,13 +21,13 @@ class CoreDataManager: CoreDataManagerType {
             completion(.success(data))
             print("ExportCoreData DONE")
         } catch {
-            completion(.failure(CoreDataError.parseFailed))
+            completion(.failure(CoreDataError.fetchFailed))
             print("ExportCoreData ERROR")
         }
     }
     
-    func saveDataTask(data: DomainModel?) {
-        guard let data = data else { return }
+    func saveDataTask(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void) {
+        guard let data = data else { return completion(CoreDataError.saveFailed) }
         let context = coreDataStack.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "SavePicture", in: context)
         let object = NSManagedObject(entity: entity!, insertInto: context) as? SavePicture
@@ -40,14 +40,16 @@ class CoreDataManager: CoreDataManagerType {
         
         do {
             try context.save()
+            completion(nil)
             print("CoreDataSave DONE")
         } catch {
+            completion(CoreDataError.saveFailed)
             print("CoreDataSave ERROR")
         }
     }
     
-    func deleteDataTask(data: DomainModel?) {
-        guard let id = data?.id else { return }
+    func deleteDataTask(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void) {
+        guard let id = data?.id else { return completion(CoreDataError.deleteFailed)}
         var allRecipe = [SavePicture]()
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<SavePicture> = SavePicture.fetchRequest()
@@ -58,6 +60,7 @@ class CoreDataManager: CoreDataManagerType {
             try context.save()
             print("CoreDataDelete DONE")
         } catch {
+            completion(CoreDataError.deleteFailed)
             print("CoreDataDelete ERROR")
         }
     }

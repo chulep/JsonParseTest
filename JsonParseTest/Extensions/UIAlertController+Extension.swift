@@ -15,5 +15,4 @@ extension UIAlertController {
         alertController.addAction(cancelButton)
         return alertController
     }
-    
 }
