@@ -9,12 +9,12 @@ import Foundation
 
 class PictureCellViewModel: PictureCellViewModelType {
     
-    var result: DomainModel
+    var result: DomainResultModel
     let repository: RepositoryType?
     
     //MARK: - init
     
-    required init(result: DomainModel, repository: RepositoryType?) {
+    required init(result: DomainResultModel, repository: RepositoryType?) {
         self.result = result
         self.repository = repository
     }

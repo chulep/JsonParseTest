@@ -8,6 +8,11 @@
 import Foundation
 
 struct DomainModel {
+    let total: Int
+    let results: [DomainResultModel]?
+}
+
+struct DomainResultModel {
     let id: String?
     let name: String?
     let date: String?

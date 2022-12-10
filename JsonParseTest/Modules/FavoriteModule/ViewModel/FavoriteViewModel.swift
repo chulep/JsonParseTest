@@ -9,7 +9,7 @@ import Foundation
 
 final class FavoriteViewModel: FavoriteViewModelType {
     
-    var pictureArray: [DomainModel]?
+    var pictureArray: [DomainResultModel]?
     
     private let repository: RepositoryType
     

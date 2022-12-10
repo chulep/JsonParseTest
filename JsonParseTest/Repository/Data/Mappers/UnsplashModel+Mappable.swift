@@ -9,7 +9,7 @@ import Foundation
 
 extension Results {
     
-    var domain: DomainModel {
-        DomainModel(id: id, name: user?.username, date: created_at, description: description, imageUrlFull: urls.full, imageUrlSmall: urls.small, favorite: false)
+    var domain: DomainResultModel {
+        DomainResultModel(id: id, name: user?.username, date: created_at, description: description, imageUrlFull: urls.regular, imageUrlSmall: urls.thumb, favorite: false)
     }
 }

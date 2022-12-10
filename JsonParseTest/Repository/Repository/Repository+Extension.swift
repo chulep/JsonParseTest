@@ -11,8 +11,8 @@ extension Repository {
     
     //MARK: - Support Methods
     
-    internal func createRequest(searchText: String) -> URLRequest {
-        let parameters = prepareParametrs(searchText: searchText)
+    internal func createRequest(searchText: String, page: Int) -> URLRequest {
+        let parameters = prepareParametrs(searchText: searchText, page: page)
         let url = createURL(parameters: parameters)
         
         var request = URLRequest(url: url)
@@ -33,11 +33,11 @@ extension Repository {
         return components.url!
     }
     
-    private func prepareParametrs(searchText: String) -> [String: String] {
+    private func prepareParametrs(searchText: String, page: Int) -> [String: String] {
         var parametrs = [String: String]()
         parametrs["query"] = searchText
-        parametrs["page"] = String(1)
-        parametrs["per_page"] = String(10)
+        parametrs["page"] = String(page)
+        parametrs["per_page"] = String(30)
         return parametrs
     }
     

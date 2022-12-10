@@ -26,7 +26,7 @@ class CoreDataManager: CoreDataManagerType {
         }
     }
     
-    func saveDataTask(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void) {
+    func saveDataTask(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void) {
         guard let data = data else { return completion(CoreDataError.saveFailed) }
         let context = coreDataStack.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "SavePicture", in: context)
@@ -48,7 +48,7 @@ class CoreDataManager: CoreDataManagerType {
         }
     }
     
-    func deleteDataTask(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void) {
+    func deleteDataTask(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void) {
         guard let id = data?.id else { return completion(CoreDataError.deleteFailed)}
         var allRecipe = [SavePicture]()
         let context = coreDataStack.persistentContainer.viewContext

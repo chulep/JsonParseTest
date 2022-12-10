@@ -8,8 +8,10 @@
 import Foundation
 
 protocol SearchViewModelType {
-    var result: [DomainModel]? { get set }
+    var result: [DomainResultModel]? { get set }
+    var isLoading: Bool { get set }
     func getDownloadData(searchText: String, completion: @escaping (Result<(), NetworkError>) -> Void)
+    func getDownloadDataNetxPage(completion: @escaping (Result<(), NetworkError>) -> Void)
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType?
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType?
 }

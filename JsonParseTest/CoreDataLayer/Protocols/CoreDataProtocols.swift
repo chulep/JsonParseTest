@@ -9,6 +9,6 @@ import CoreData
 
 protocol CoreDataManagerType {
     func getDataTask<T: NSManagedObject>(completion: @escaping (Result<[T]?, CoreDataError>) -> Void)
-    func saveDataTask(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void)
-    func deleteDataTask(data: DomainModel?, completion: @escaping (CoreDataError?) -> Void)
+    func saveDataTask(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void)
+    func deleteDataTask(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void)
 }

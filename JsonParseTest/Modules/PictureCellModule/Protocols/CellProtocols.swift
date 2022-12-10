@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PictureCellViewModelType {
-    init(result: DomainModel, repository: RepositoryType?)
+    init(result: DomainResultModel, repository: RepositoryType?)
     func getDownloadImage(completion: @escaping (Data?) -> Void)
 }
 

@@ -9,12 +9,12 @@ import UIKit
 
 extension UIImage {
     
-    func createFavoriteImage(_ isFavorite: Bool?) -> UIImage {
+    convenience init(isFavorite: Bool?) {
         switch isFavorite {
         case true:
-            return UIImage(systemName: "heart.fill")!
+            self.init(systemName: "heart.fill")!
         default:
-            return UIImage(systemName: "heart")!
+            self.init(systemName: "heart")!
         }
     }
 }

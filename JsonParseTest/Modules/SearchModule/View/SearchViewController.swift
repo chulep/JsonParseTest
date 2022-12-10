@@ -28,6 +28,8 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     private var activityIndicator = UIActivityIndicatorView(style: .medium)
     
+    private var loadingFooterView: LoadingReusableView?
+    
     //MARK: - Init
     
     convenience init(viewModel: SearchViewModelType) {
@@ -78,12 +80,14 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(PictureCell.self, forCellWithReuseIdentifier: PictureCell.identifire)
+        collectionView.register(LoadingReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingReusableView.identifire)
     }
     
     private func downloadData(searchText: String) {
         activityIndicator.startAnimating()
         alertLabel.isHidden = true
         collectionView.isHidden = true
+        collectionView.reloadData()
         viewModel?.getDownloadData(searchText: searchText, completion: { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -103,13 +107,11 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     private func errorHandler(error: NetworkError) {
         switch error {
-        case .uploadedFailed:
-            present(UIAlertController.createErrorAlert(message: error.rawValue), animated: true)
         case .nothingFound:
             alertLabel.text = error.rawValue
             alertLabel.isHidden = false
-        case .parseFailed:
-            present(UIAlertController.createErrorAlert(message: error.rawValue), animated: true)
+        default:
+            present(UIAlertController(errorMessage: error.rawValue), animated: true)
         }
     }
     
@@ -123,7 +125,6 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
         flowLayout.scrollDirection = .vertical
         flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 15, height: view.bounds.width / 2 - 15)
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
-        flowLayout.sectionHeadersPinToVisibleBounds = true
         return flowLayout
     }
 }
@@ -133,7 +134,11 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.result?.count ?? 0
+        return viewModel?.result?.count ?? 0
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -154,6 +159,41 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
+//MARK: - CollectionView Pagination
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if viewModel?.isLoading == false {
+            return CGSize(width: collectionView.bounds.width, height: 0)
+        } else {
+            return CGSize(width: collectionView.bounds.width, height: 20)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LoadingReusableView.identifire, for: indexPath) as! LoadingReusableView
+        loadingFooterView = footer
+        return footer
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let endCell = viewModel?.result?.count ?? 1
+        if indexPath.row == endCell - 1 {
+            viewModel?.getDownloadDataNetxPage(completion: { result in
+                DispatchQueue.main.async {
+                    collectionView.reloadData()
+                }
+            })
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        loadingFooterView?.animating(viewModel?.isLoading)
+    }
+}
+
+
 //MARK: - Search Bar Delegate
 
 extension SearchViewController: UISearchBarDelegate {
@@ -170,6 +210,6 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         hideKeyboard()
     }
-
+    
 }
 

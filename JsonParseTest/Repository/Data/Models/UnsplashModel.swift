@@ -9,6 +9,7 @@ import Foundation
 
 struct UnsplashModel: Codable {
     let total: Int
+    let total_pages: Int
     let results: [Results]
 }
 
@@ -25,6 +26,6 @@ struct User: Codable {
 }
 
 struct Urls: Codable {
-    let full: String
-    let small: String
+    let regular: String
+    let thumb: String
 }

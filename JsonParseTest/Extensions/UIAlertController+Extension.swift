@@ -9,10 +9,9 @@ import UIKit
 
 extension UIAlertController {
     
-    static func createErrorAlert(message: String) -> UIAlertController {
-        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+    convenience init(errorMessage: String?) {
+        self.init(title: "Ошибка", message: errorMessage, preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Ок", style: .cancel)
-        alertController.addAction(cancelButton)
-        return alertController
+        addAction(cancelButton)
     }
 }

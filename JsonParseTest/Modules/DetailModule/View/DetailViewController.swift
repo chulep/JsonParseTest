@@ -85,7 +85,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         navigationController?.navigationBar.tintColor = .systemGray
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelDetail))
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage().createFavoriteImage(viewModel?.favorite), style: .plain, target: self, action: #selector(saveToFavorites)),
+            UIBarButtonItem(image: UIImage(isFavorite: viewModel?.favorite), style: .plain, target: self, action: #selector(saveToFavorites)),
             UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
     }
     
@@ -127,7 +127,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     
     @objc private func saveToFavorites() {
         viewModel?.saveFavorite(completion: { [weak self] error in
-            if let error = error { self?.present(UIAlertController.createErrorAlert(message: error.rawValue), animated: true) }
+            if let error = error { self?.present(UIAlertController(errorMessage: error.rawValue), animated: true) }
         })
         addNavigationItem()
     }

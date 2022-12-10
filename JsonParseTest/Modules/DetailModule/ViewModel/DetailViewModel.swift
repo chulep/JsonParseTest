@@ -15,12 +15,12 @@ class DetailViewModel: DetailViewModelType {
     var url: String?
     var favorite: Bool
     
-    private var detail: DomainModel?
+    private var detail: DomainResultModel?
     private var repository: RepositoryType?
     
     //MARK: - Init
     
-    required init(detailData: DomainModel, repository: RepositoryType) {
+    required init(detailData: DomainResultModel, repository: RepositoryType) {
         self.repository = repository
         self.url = detailData.imageUrlFull
         self.name = NameHelper.author(name: detailData.name)
