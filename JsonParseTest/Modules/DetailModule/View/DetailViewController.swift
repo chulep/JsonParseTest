@@ -76,7 +76,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         NSLayoutConstraint.activate([
             descriptionStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             descriptionStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            descriptionStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            descriptionStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
             descriptionStackView.heightAnchor.constraint(equalTo: descriptionStackView.widthAnchor, multiplier: 1/3)
         ])
     }
@@ -87,6 +87,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(isFavorite: viewModel?.favorite), style: .plain, target: self, action: #selector(saveToFavorites)),
             UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
+        UINavigationBar.appearance().backgroundColor = ColorHelper.white
     }
     
     //MARK: - Set Data Method
@@ -103,7 +104,8 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
                 let image = UIImage(data: data) else { return }
                 self.imageView.image = image
                 self.activityIndicator.stopAnimating()
-                self.descriptionStackView.disappearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
+                self.descriptionStackView.appearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
+                self.navigationController?.navigationBar.appearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
             }
         })
     }
@@ -116,7 +118,8 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     }
     
     @objc private func descriptionTapHide() {
-        descriptionStackView.appearForAlpha(descriptionStackView.alpha, withDuration: 0.2)
+        navigationController?.navigationBar.appearAnimation(currentAlpha: Double(navigationController!.navigationBar.alpha), withDuration: 0.2)
+        descriptionStackView.appearAnimation(currentAlpha: descriptionStackView.alpha, withDuration: 0.2)
     }
     
     //MARK: - Other Methods

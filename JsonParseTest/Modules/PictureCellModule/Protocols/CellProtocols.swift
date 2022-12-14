@@ -14,4 +14,5 @@ protocol PictureCellViewModelType {
 
 protocol PictureCellType {
     var viewModel: PictureCellViewModelType? { get }
+    func setImage()
 }

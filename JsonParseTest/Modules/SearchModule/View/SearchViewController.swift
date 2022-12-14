@@ -72,6 +72,8 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     }
     
     private func setupSearchBar() {
+         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ColorHelper.purple] , for: .normal)
+        searchBar.setValue("Отмена", forKey: "cancelButtonText")
         searchBar.delegate = self
         navigationItem.titleView = searchBar
     }
@@ -86,15 +88,15 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     private func downloadData(searchText: String) {
         activityIndicator.startAnimating()
         alertLabel.isHidden = true
-        collectionView.isHidden = true
+        collectionView.alpha = 0
         collectionView.reloadData()
         viewModel?.getDownloadData(searchText: searchText, completion: { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(()):
                     self?.collectionView.reloadData()
-                    self?.collectionView.isHidden = false
                     self?.activityIndicator.stopAnimating()
+                    self?.collectionView.appearAnimation(withDuration: 0.2, deadline: 0, toAlpha: 1)
                 case .failure(let error):
                     self?.errorHandler(error: error)
                     self?.activityIndicator.stopAnimating()
@@ -137,10 +139,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return viewModel?.result?.count ?? 0
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewModel = viewModel?.createDetailViewModel(indexPath: indexPath)
         present(ModuleBuilder.createDetailModule(viewModel: detailViewModel), animated: true)
@@ -153,8 +151,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     //data sourse
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.identifire, for: indexPath) as! PictureCell
-        let cellViewModel = viewModel?.createPhotoCellViewModel(indexPath: indexPath)
-        cell.viewModel = cellViewModel
+        cell.viewModel = viewModel?.createPhotoCellViewModel(indexPath: indexPath)
+        cell.setImage()
         return cell
     }
 }

@@ -25,7 +25,6 @@ final class Repository: RepositoryType {
         }
     }
     
-    
     func getRemoteData(searchText: String, completion: @escaping (Result<(DomainModel?), NetworkError>) -> Void) {
         let request = createRequest(searchText: searchText, page: 1)
         

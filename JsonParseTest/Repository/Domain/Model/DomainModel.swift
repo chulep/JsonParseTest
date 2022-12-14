@@ -19,5 +19,5 @@ struct DomainResultModel {
     let description: String?
     let imageUrlFull: String?
     let imageUrlSmall: String?
-    var favorite: Bool
+    var isFavorite: Bool
 }

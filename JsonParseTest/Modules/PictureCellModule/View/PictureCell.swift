@@ -29,7 +29,6 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         backgroundColor = ColorHelper.lightGray
         addSubviews()
         setupUI()
-        setImage()
     }
     
     override var isHighlighted: Bool {
@@ -38,11 +37,16 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
     //MARK: - Methods
     
     private func addSubviews() {
-        addSubview(imageView)
         addSubview(activityIndicator)
+        addSubview(imageView)
     }
     
     private func setupUI() {
@@ -52,11 +56,11 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         clipsToBounds = true
     }
     
-    private func setImage() {
+    func setImage() {
         activityIndicator.startAnimating()
         viewModel?.getDownloadImage(completion: { [weak self] data in
             guard let data = data,
-            let image = UIImage(data: data) else { return }
+                  let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
                 self?.imageView.image = image

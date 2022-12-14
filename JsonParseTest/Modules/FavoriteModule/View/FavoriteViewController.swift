@@ -122,6 +122,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.identifire, for: indexPath) as! PictureCell
         cell.viewModel = viewModel?.createCellViewModel(indexPath: indexPath)
+        cell.setImage()
         return cell
     }
     

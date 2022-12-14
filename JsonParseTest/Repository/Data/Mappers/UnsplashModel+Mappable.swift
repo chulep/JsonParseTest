@@ -10,6 +10,6 @@ import Foundation
 extension Results {
     
     var domain: DomainResultModel {
-        DomainResultModel(id: id, name: user?.username, date: created_at, description: description, imageUrlFull: urls.regular, imageUrlSmall: urls.thumb, favorite: false)
+        DomainResultModel(id: id, name: user?.username, date: created_at, description: description, imageUrlFull: urls.regular, imageUrlSmall: urls.thumb, isFavorite: false)
     }
 }

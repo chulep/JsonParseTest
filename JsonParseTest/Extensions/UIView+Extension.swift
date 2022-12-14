@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIView {
-    
-    func disappearAnimation(withDuration: Double, deadline: Double, toAlpha: Double) {
+    func appearAnimation(withDuration: Double, deadline: Double?, toAlpha: Double) {
+        let deadline = deadline ?? 0
         DispatchQueue.main.asyncAfter(deadline: .now() + deadline) {
             UIView.animate(withDuration: withDuration) {
                 self.alpha = toAlpha
@@ -17,9 +17,9 @@ extension UIView {
         }
     }
     
-    func appearForAlpha(_ alpha: Double, withDuration: Double) {
+    func appearAnimation(currentAlpha: Double, withDuration: Double) {
         UIView.animate(withDuration: withDuration) {
-            switch alpha {
+            switch currentAlpha {
             case 0:
                 self.alpha = 1
             default:

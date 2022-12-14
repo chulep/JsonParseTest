@@ -22,15 +22,18 @@ final class FavoriteViewModel: FavoriteViewModelType {
     //MARK: - Methods
     
     func getData(completion: @escaping (Result<(), Error>) -> Void) {
-        repository.getLocalData { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.pictureArray = data
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
+        if pictureArray == nil {
+            repository.getLocalData { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.pictureArray = data
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         }
+        
     }
     
     func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {

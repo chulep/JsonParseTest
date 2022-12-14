@@ -10,6 +10,6 @@ import Foundation
 extension SavePicture {
     
     var domain: DomainResultModel {
-        DomainResultModel(id: idSave, name: nameSave, date: dateSave, description: descriptionSave, imageUrlFull: urlFullSave, imageUrlSmall: urlSmallSave, favorite: true)
+        DomainResultModel(id: idSave, name: nameSave, date: dateSave, description: descriptionSave, imageUrlFull: urlFullSave, imageUrlSmall: urlSmallSave, isFavorite: true)
     }
 }

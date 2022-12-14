@@ -17,9 +17,12 @@
 		5D1FCDAF291D29C600150DD1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDAE291D29C600150DD1 /* TabBarController.swift */; };
 		5D1FCDB2291D457B00150DD1 /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB1291D457B00150DD1 /* PictureCell.swift */; };
 		5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */; };
+		5D24863329479B5F005E2617 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24863229479B5F005E2617 /* LaunchViewController.swift */; };
+		5D24863529479D4E005E2617 /* LaunchScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D24863429479D4E005E2617 /* LaunchScreenPresenter.swift */; };
 		5D311C14293F31E100634EAA /* NameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D311C13293F31E100634EAA /* NameHelper.swift */; };
 		5D37FDA1293F8048002BCCDF /* ErorrsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37FDA0293F8048002BCCDF /* ErorrsHelper.swift */; };
 		5D37FDA6293F9591002BCCDF /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37FDA5293F9591002BCCDF /* UIAlertController+Extension.swift */; };
+		5D5FD53829451289004567B7 /* UINavigationController+Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FD53729451289004567B7 /* UINavigationController+Extencion.swift */; };
 		5D821BF2293D032600140C3E /* CellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D821BF1293D032600140C3E /* CellProtocols.swift */; };
 		5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91C6162921403100705E62 /* FavoriteViewController.swift */; };
 		5D9EC88A2937124E00B1CDE5 /* SavePicture+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */; };
@@ -61,9 +64,12 @@
 		5D1FCDAE291D29C600150DD1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5D1FCDB1291D457B00150DD1 /* PictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCell.swift; sourceTree = "<group>"; };
 		5D1FCDB3291D55BC00150DD1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5D24863229479B5F005E2617 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		5D24863429479D4E005E2617 /* LaunchScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenPresenter.swift; sourceTree = "<group>"; };
 		5D311C13293F31E100634EAA /* NameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameHelper.swift; sourceTree = "<group>"; };
 		5D37FDA0293F8048002BCCDF /* ErorrsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErorrsHelper.swift; sourceTree = "<group>"; };
 		5D37FDA5293F9591002BCCDF /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		5D5FD53729451289004567B7 /* UINavigationController+Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extencion.swift"; sourceTree = "<group>"; };
 		5D821BF1293D032600140C3E /* CellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocols.swift; sourceTree = "<group>"; };
 		5D91C6162921403100705E62 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavePicture+Mappable.swift"; sourceTree = "<group>"; };
@@ -157,12 +163,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5D24862F29479A34005E2617 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5DF8420B291ABE4800E18817 /* LaunchScreen.storyboard */,
+				5D24863229479B5F005E2617 /* LaunchViewController.swift */,
+				5D24863429479D4E005E2617 /* LaunchScreenPresenter.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
 		5D37FDA4293F956A002BCCDF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				5D37FDA5293F9591002BCCDF /* UIAlertController+Extension.swift */,
 				5D01B150294250E30055A8EF /* UIView+Extension.swift */,
 				5D01B1522942548F0055A8EF /* UIImage+Extension.swift */,
+				5D5FD53729451289004567B7 /* UINavigationController+Extencion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +376,7 @@
 		5DE7B89D29366AB9007B3FE6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5DF84209291ABE4800E18817 /* Assets.xcassets */,
 				5D37FDA0293F8048002BCCDF /* ErorrsHelper.swift */,
 				5DE7B89E29366AD6007B3FE6 /* ConstantHelper.swift */,
 				5DE7B8A029366ADF007B3FE6 /* ColorHelper.swift */,
@@ -445,15 +463,14 @@
 				5DF841FD291ABE4600E18817 /* AppDelegate.swift */,
 				5DF841FF291ABE4600E18817 /* SceneDelegate.swift */,
 				5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */,
+				5DF8420E291ABE4800E18817 /* Info.plist */,
 				5DE2B45C293E4EA5007262DF /* Repository */,
 				5DE7B8A7293673B7007B3FE6 /* Modules */,
 				5D5E80B7291C0B62008BDF3C /* NetworkLayer */,
 				5D5E80B8291C0B76008BDF3C /* CoreDataLayer */,
 				5D37FDA4293F956A002BCCDF /* Extensions */,
 				5DE7B89D29366AB9007B3FE6 /* Helpers */,
-				5DF84209291ABE4800E18817 /* Assets.xcassets */,
-				5DF8420B291ABE4800E18817 /* LaunchScreen.storyboard */,
-				5DF8420E291ABE4800E18817 /* Info.plist */,
+				5D24862F29479A34005E2617 /* LaunchScreen */,
 			);
 			path = JsonParseTest;
 			sourceTree = "<group>";
@@ -550,6 +567,7 @@
 				5DE7B8B7293688B3007B3FE6 /* UnsplashModel+Mappable.swift in Sources */,
 				5D159D312933B34E009BF004 /* SearchViewModel.swift in Sources */,
 				5DE2B46C293E5968007262DF /* CoreDataProtocols.swift in Sources */,
+				5D24863529479D4E005E2617 /* LaunchScreenPresenter.swift in Sources */,
 				5DE7B8AD2936775B007B3FE6 /* FavoriteViewModel.swift in Sources */,
 				5DF841FE291ABE4600E18817 /* AppDelegate.swift in Sources */,
 				5D1FCDB2291D457B00150DD1 /* PictureCell.swift in Sources */,
@@ -557,6 +575,7 @@
 				5DE7B8A429366F38007B3FE6 /* DetailProtocols.swift in Sources */,
 				5D37FDA1293F8048002BCCDF /* ErorrsHelper.swift in Sources */,
 				5D37FDA6293F9591002BCCDF /* UIAlertController+Extension.swift in Sources */,
+				5D5FD53829451289004567B7 /* UINavigationController+Extencion.swift in Sources */,
 				5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */,
 				5D01B15529425CD90055A8EF /* LoadingReusableView.swift in Sources */,
 				5DE2B467293E58D1007262DF /* NetworkManagerProtocols.swift in Sources */,
@@ -570,6 +589,7 @@
 				5DFB83AC291FD0A700D09558 /* DetailViewController.swift in Sources */,
 				5D159D3E2933CD50009BF004 /* DetailViewModel.swift in Sources */,
 				5D159D362933B95C009BF004 /* PictureCellViewModel.swift in Sources */,
+				5D24863329479B5F005E2617 /* LaunchViewController.swift in Sources */,
 				5DE7B8B32936874B007B3FE6 /* DomainModel.swift in Sources */,
 				5D159D342933B378009BF004 /* SearchProtocols.swift in Sources */,
 				5D9EC88A2937124E00B1CDE5 /* SavePicture+Mappable.swift in Sources */,

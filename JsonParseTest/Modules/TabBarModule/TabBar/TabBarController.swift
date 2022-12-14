@@ -12,5 +12,6 @@ class TabBarController: UITabBarController, TabBarControllerType {
     required convenience init(viewControllers: [UIViewController]) {
         self.init(nibName: nil, bundle: nil)
         self.viewControllers = viewControllers
+        tabBar.tintColor = ColorHelper.purple
     }
 }

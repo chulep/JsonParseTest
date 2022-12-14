@@ -27,7 +27,7 @@ class DetailViewModel: DetailViewModelType {
         self.description = NameHelper.description(text: detailData.description)
         self.date = NameHelper.date(text: detailData.date)
         self.detail = detailData
-        self.favorite = detail?.favorite ?? false
+        self.favorite = detail?.isFavorite ?? false
         self.checkFavorite()
     }
     
