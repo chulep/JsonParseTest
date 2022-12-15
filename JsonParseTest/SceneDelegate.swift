@@ -11,15 +11,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var coreDataStack = CoreDataStack()
+    var launchScreenPresenter: LaunchScreenPresenter? = LaunchScreenPresenter()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        // Start App
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let myTabBarController = TabBarController()
         window = UIWindow(windowScene: windowScene)
         window?.backgroundColor = .white
-        window?.rootViewController = myTabBarController
+        window?.rootViewController = ModuleBuilder.createStartTabBarModule()
         window?.makeKeyAndVisible()
-        print("OPEN")
+        
+        launchScreenPresenter?.present(windowScene: windowScene)
+        launchScreenPresenter?.dismiss {
+            self.launchScreenPresenter = nil
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

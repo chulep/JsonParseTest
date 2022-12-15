@@ -15,11 +15,20 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
     
     private lazy var collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createCollectionViewFlowLayout())
     
+    private var alertLabel: UILabel = {
+        $0.textColor = ColorHelper.lightGray
+        $0.text = NameHelper.noFavoriteLabel
+        $0.textAlignment = .center
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    } (UILabel())
+    
     //MARK: - Init
     
     convenience init(viewModel: FavoriteViewModelType) {
         self.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        setupSelf()
     }
     
     //MARK: - Lifecycle
@@ -28,6 +37,7 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         super.viewDidLoad()
         setupSelf()
         addSubviews()
+        addConstraints()
         setupCollectionView()
     }
     
@@ -40,10 +50,20 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
     
     private func setupSelf() {
         view.backgroundColor = ColorHelper.white
+        tabBarItem.title = NameHelper.favoriteTabBarName
+        tabBarItem.image = UIImage(systemName: "heart")
     }
     
     private func addSubviews() {
         view.addSubview(collectionView)
+        view.addSubview(alertLabel)
+    }
+    
+    private func addConstraints() {
+        NSLayoutConstraint.activate([
+            alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     private func setupCollectionView() {
@@ -51,6 +71,20 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         collectionView.dataSource = self
         collectionView.register(PictureCell.self, forCellWithReuseIdentifier: PictureCell.identifire)
     }
+    
+    private func setData() {
+        viewModel?.getData(completion: { [weak self] result in
+            switch result {
+            case .success(()):
+                self?.collectionView.reloadData()
+                self?.hideAllertLabel()
+            case .failure(let error):
+                self?.errorHandler(error: error)
+            }
+        })
+    }
+    
+    //MARK: - Suppert Methods
     
     private func createCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
@@ -61,21 +95,20 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         return flowLayout
     }
     
-    private func setData() {
-        viewModel?.getData(completion: { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(()):
-                    self?.collectionView.reloadData()
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        })
+    private func hideAllertLabel() {
+        if viewModel?.pictureArray?.count != 0 {
+            alertLabel.isHidden = true
+        } else {
+            alertLabel.isHidden = false
+        }
+    }
+    
+    private func errorHandler(error: CoreDataError) {
+        present(UIAlertController(errorMessage: error.rawValue), animated: true)
     }
 }
-    
-    //MARK: - CollectionView Delegate & DataSourse
+
+//MARK: - CollectionView Delegate & DataSourse
 
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -84,18 +117,14 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let network = NetworkFetcher()
-        let coreData = CoreDataFetcher()
-        let vm = DetailViewModel(result: (viewModel?.pictureArray?[indexPath.row])!, networkFetcher: network, coreDataFetcher: coreData)
-        let detailViewController = DetailViewController(viewModel: vm)
-        let navController = UINavigationController(rootViewController: detailViewController)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true)
+        let detailViewModel = viewModel?.createDetailViewModel(indexPath: indexPath)
+        present(ModuleBuilder.createDetailModule(viewModel: detailViewModel), animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PictureCell.identifire, for: indexPath) as! PictureCell
         cell.viewModel = viewModel?.createCellViewModel(indexPath: indexPath)
+        cell.setImage()
         return cell
     }
     

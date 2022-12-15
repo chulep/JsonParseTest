@@ -29,8 +29,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         $0.axis = .vertical
         $0.backgroundColor = ColorHelper.lightGray
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.layoutMargins = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 7)
+        $0.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         $0.isLayoutMarginsRelativeArrangement = true
+        $0.layer.cornerRadius = ConstantHelper.radius
         return $0
     }(UIStackView())
     
@@ -54,18 +55,12 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         setData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        descriptionStackView.layer.cornerRadius = descriptionStackView.bounds.height / 10
-        descriptionStackView.clipsToBounds = true
-    }
-    
     //MARK: - Add Subviews
     
     private func addSubviews() {
-        descriptionStackView.addArrangedSubview(dateLabel)
         descriptionStackView.addArrangedSubview(nameLebel)
         descriptionStackView.addArrangedSubview(descriptionLabel)
+        descriptionStackView.addArrangedSubview(dateLabel)
         
         view.addSubview(imageView)
         view.addSubview(descriptionStackView)
@@ -74,6 +69,15 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     
     //MARK: - UI
     
+    private func addNavigationItem() {
+        navigationController?.navigationBar.tintColor = .systemGray
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelDetail))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(isFavorite: viewModel?.isFavorite), style: .plain, target: self, action: #selector(saveToFavorites)),
+            UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
+        UINavigationBar.appearance().backgroundColor = ColorHelper.white
+    }
+    
     private func addConstraints() {
         imageView.frame = view.bounds
         activityIndicator.center = imageView.center
@@ -81,17 +85,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         NSLayoutConstraint.activate([
             descriptionStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             descriptionStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            descriptionStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            descriptionStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
             descriptionStackView.heightAnchor.constraint(equalTo: descriptionStackView.widthAnchor, multiplier: 1/3)
         ])
-    }
-    
-    private func addNavigationItem() {
-        navigationController?.navigationBar.tintColor = .systemGray
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelDetail))
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: viewModel!.barButtonImageName()), style: .plain, target: self, action: #selector(saveToFavorites)),
-            UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(sharePhoto))]
     }
     
     //MARK: - Set Data Method
@@ -102,13 +98,13 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         descriptionLabel.text = viewModel?.description
         dateLabel.text = viewModel?.date
         
-        viewModel?.getImage(completion: { data in
+        viewModel?.getImage(completion: { [weak self] data in
             DispatchQueue.main.async {
                 guard let data = data,
                 let image = UIImage(data: data) else { return }
-                self.imageView.image = image
-                self.activityIndicator.stopAnimating()
-                self.descriptionAutoHide()
+                self?.imageView.image = image
+                self?.activityIndicator.stopAnimating()
+                self?.descriptionAppear()
             }
         })
     }
@@ -121,17 +117,13 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     }
     
     @objc private func descriptionTapHide() {
-        UIView.animate(withDuration: 0.2) {
-            self.descriptionStackView.alpha == 1 ? (self.descriptionStackView.alpha = 0) : (self.descriptionStackView.alpha = 1)
-        }
+        navigationController?.navigationBar.appearAnimation(currentAlpha: Double(navigationController!.navigationBar.alpha), withDuration: 0.2)
+        descriptionStackView.appearAnimation(currentAlpha: descriptionStackView.alpha, withDuration: 0.2)
     }
     
-    private func descriptionAutoHide() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            UIView.animate(withDuration: 0.2) {
-                self.descriptionStackView.alpha = 0
-            }
-        }
+    private func descriptionAppear() {
+        descriptionStackView.appearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
+        navigationController?.navigationBar.appearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
     }
     
     //MARK: - Other Methods
@@ -141,7 +133,9 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     }
     
     @objc private func saveToFavorites() {
-        viewModel?.saveFavorite()
+        viewModel?.saveFavorite(completion: { [weak self] error in
+            if let error = error { self?.present(UIAlertController(errorMessage: error.rawValue), animated: true) }
+        })
         addNavigationItem()
     }
     

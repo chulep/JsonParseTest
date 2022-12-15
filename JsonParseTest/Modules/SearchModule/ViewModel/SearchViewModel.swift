@@ -9,22 +9,32 @@ import Foundation
 
 class SearchViewModel: SearchViewModelType {
 
-    var result: [DomainModel]?
-    let networkFetcher: NetworkFetcher
+    var result: [DomainResultModel]?
+    var isLoading = false
+    
+    private let repository: RepositoryType
+    private var searchText: String?
+    private var totalCell: Int?
+    private var page = 1
     
     //MARK: - Init
     
-    init(networkFetcher: NetworkFetcher) {
-        self.networkFetcher = networkFetcher
+    init(repository: RepositoryType) {
+        self.repository = repository
     }
     
     //MARK: - Methods
     
-    func getDownloadData(searchText: String, completion: @escaping (Result<(), Error>) -> Void) {
-        networkFetcher.getModel(searchText: searchText) { result in
+    func getDownloadData(searchText: String, completion: @escaping (Result<(), NetworkError>) -> Void) {
+        self.searchText = searchText
+        result = nil
+        page = 1
+        
+        repository.getRemoteData(searchText: searchText) { result in
             switch result {
             case .success(let data):
-                self.result = data
+                self.result = data?.results
+                self.totalCell = data?.total
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
@@ -32,17 +42,35 @@ class SearchViewModel: SearchViewModelType {
         }
     }
     
+    func getDownloadDataNetxPage(completion: @escaping (Result<(), NetworkError>) -> Void) {
+        isLoading = false
+        if totalCell != result?.count {
+            isLoading = true
+            guard let searchText = searchText else { return }
+            page += 1
+            
+            repository.getRemoteData(searchText: searchText, page: page) { result in
+                switch result {
+                case .success(let data):
+                    self.result! += data!
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let cellPresenter = PictureCellViewModel(result: result, networkFetcher: networkFetcher)
-        return cellPresenter
+        let cellViewModel = PictureCellViewModel(result: result, repository: repository)
+        return cellViewModel
     }
     
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }
-        let coreData = CoreDataFetcher()
-        let detailPresenter = DetailViewModel(result: result, networkFetcher: networkFetcher, coreDataFetcher: coreData)
-        return detailPresenter
+        let detailViewModel = DetailViewModel(detailData: result, repository: repository)
+        return detailViewModel
     }
     
 }

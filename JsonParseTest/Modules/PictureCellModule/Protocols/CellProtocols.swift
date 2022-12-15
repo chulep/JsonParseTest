@@ -8,10 +8,11 @@
 import Foundation
 
 protocol PictureCellViewModelType {
-    init(result: DomainModel, networkFetcher: NetworkFetcherType?)
+    init(result: DomainResultModel, repository: RepositoryType?)
     func getDownloadImage(completion: @escaping (Data?) -> Void)
 }
 
 protocol PictureCellType {
     var viewModel: PictureCellViewModelType? { get }
+    func setImage()
 }
