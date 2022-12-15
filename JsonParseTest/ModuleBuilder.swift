@@ -34,5 +34,4 @@ final class ModuleBuilder {
         navController.modalPresentationStyle = .fullScreen
         return navController
     }
-
 }

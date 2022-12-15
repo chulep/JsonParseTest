@@ -8,12 +8,12 @@
 import Foundation
 
 protocol DetailViewModelType {
+    init(detailData: DomainResultModel, repository: RepositoryType)
     var name: String { get }
     var description: String { get }
     var date: String { get }
     var url: String? { get }
-    var favorite: Bool { get set }
-    init(detailData: DomainResultModel, repository: RepositoryType)
+    var isFavorite: Bool { get set }
     func getImage(completion: @escaping (Data?) -> Void)
     func saveFavorite(completion: @escaping (CoreDataError?) -> Void)
 }

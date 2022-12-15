@@ -22,7 +22,6 @@
 		5D311C14293F31E100634EAA /* NameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D311C13293F31E100634EAA /* NameHelper.swift */; };
 		5D37FDA1293F8048002BCCDF /* ErorrsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37FDA0293F8048002BCCDF /* ErorrsHelper.swift */; };
 		5D37FDA6293F9591002BCCDF /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37FDA5293F9591002BCCDF /* UIAlertController+Extension.swift */; };
-		5D5FD53829451289004567B7 /* UINavigationController+Extencion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5FD53729451289004567B7 /* UINavigationController+Extencion.swift */; };
 		5D821BF2293D032600140C3E /* CellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D821BF1293D032600140C3E /* CellProtocols.swift */; };
 		5D91C6172921403100705E62 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91C6162921403100705E62 /* FavoriteViewController.swift */; };
 		5D9EC88A2937124E00B1CDE5 /* SavePicture+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */; };
@@ -33,7 +32,6 @@
 		5DE2B467293E58D1007262DF /* NetworkManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B466293E58D1007262DF /* NetworkManagerProtocols.swift */; };
 		5DE2B46C293E5968007262DF /* CoreDataProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B46B293E5968007262DF /* CoreDataProtocols.swift */; };
 		5DE2B471293E5C8D007262DF /* TabBarProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B470293E5C8D007262DF /* TabBarProtocols.swift */; };
-		5DE2B474293E6461007262DF /* RandomSearchTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE2B473293E6460007262DF /* RandomSearchTask.swift */; };
 		5DE6619B2923B3210087DBAE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619A2923B3200087DBAE /* CoreDataStack.swift */; };
 		5DE6619D2923B3CD0087DBAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */; };
 		5DE7B89F29366AD6007B3FE6 /* ConstantHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE7B89E29366AD6007B3FE6 /* ConstantHelper.swift */; };
@@ -69,7 +67,6 @@
 		5D311C13293F31E100634EAA /* NameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameHelper.swift; sourceTree = "<group>"; };
 		5D37FDA0293F8048002BCCDF /* ErorrsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErorrsHelper.swift; sourceTree = "<group>"; };
 		5D37FDA5293F9591002BCCDF /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
-		5D5FD53729451289004567B7 /* UINavigationController+Extencion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extencion.swift"; sourceTree = "<group>"; };
 		5D821BF1293D032600140C3E /* CellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocols.swift; sourceTree = "<group>"; };
 		5D91C6162921403100705E62 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		5D9EC8892937124E00B1CDE5 /* SavePicture+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavePicture+Mappable.swift"; sourceTree = "<group>"; };
@@ -80,7 +77,6 @@
 		5DE2B466293E58D1007262DF /* NetworkManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocols.swift; sourceTree = "<group>"; };
 		5DE2B46B293E5968007262DF /* CoreDataProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProtocols.swift; sourceTree = "<group>"; };
 		5DE2B470293E5C8D007262DF /* TabBarProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarProtocols.swift; sourceTree = "<group>"; };
-		5DE2B473293E6460007262DF /* RandomSearchTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSearchTask.swift; sourceTree = "<group>"; };
 		5DE6619A2923B3200087DBAE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DE6619C2923B3CD0087DBAE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5DE7B89E29366AD6007B3FE6 /* ConstantHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantHelper.swift; sourceTree = "<group>"; };
@@ -179,7 +175,6 @@
 				5D37FDA5293F9591002BCCDF /* UIAlertController+Extension.swift */,
 				5D01B150294250E30055A8EF /* UIView+Extension.swift */,
 				5D01B1522942548F0055A8EF /* UIImage+Extension.swift */,
-				5D5FD53729451289004567B7 /* UINavigationController+Extencion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -376,11 +371,9 @@
 		5DE7B89D29366AB9007B3FE6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				5DF84209291ABE4800E18817 /* Assets.xcassets */,
 				5D37FDA0293F8048002BCCDF /* ErorrsHelper.swift */,
 				5DE7B89E29366AD6007B3FE6 /* ConstantHelper.swift */,
 				5DE7B8A029366ADF007B3FE6 /* ColorHelper.swift */,
-				5DE2B473293E6460007262DF /* RandomSearchTask.swift */,
 				5D311C13293F31E100634EAA /* NameHelper.swift */,
 			);
 			path = Helpers;
@@ -464,6 +457,7 @@
 				5DF841FF291ABE4600E18817 /* SceneDelegate.swift */,
 				5DC3F0D32920D2F400A6897D /* ModuleBuilder.swift */,
 				5DF8420E291ABE4800E18817 /* Info.plist */,
+				5DF84209291ABE4800E18817 /* Assets.xcassets */,
 				5DE2B45C293E4EA5007262DF /* Repository */,
 				5DE7B8A7293673B7007B3FE6 /* Modules */,
 				5D5E80B7291C0B62008BDF3C /* NetworkLayer */,
@@ -561,7 +555,6 @@
 				5DF84202291ABE4600E18817 /* SearchViewController.swift in Sources */,
 				5DE2B460293E506A007262DF /* Repository+Extension.swift in Sources */,
 				5DE7B89F29366AD6007B3FE6 /* ConstantHelper.swift in Sources */,
-				5DE2B474293E6461007262DF /* RandomSearchTask.swift in Sources */,
 				5D1FCDB4291D55BC00150DD1 /* NetworkManager.swift in Sources */,
 				5D311C14293F31E100634EAA /* NameHelper.swift in Sources */,
 				5DE7B8B7293688B3007B3FE6 /* UnsplashModel+Mappable.swift in Sources */,
@@ -575,7 +568,6 @@
 				5DE7B8A429366F38007B3FE6 /* DetailProtocols.swift in Sources */,
 				5D37FDA1293F8048002BCCDF /* ErorrsHelper.swift in Sources */,
 				5D37FDA6293F9591002BCCDF /* UIAlertController+Extension.swift in Sources */,
-				5D5FD53829451289004567B7 /* UINavigationController+Extencion.swift in Sources */,
 				5DF84200291ABE4600E18817 /* SceneDelegate.swift in Sources */,
 				5D01B15529425CD90055A8EF /* LoadingReusableView.swift in Sources */,
 				5DE2B467293E58D1007262DF /* NetworkManagerProtocols.swift in Sources */,

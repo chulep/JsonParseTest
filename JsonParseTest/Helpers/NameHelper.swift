@@ -11,18 +11,17 @@ struct NameHelper {
     static let noFavoriteLabel = "Избранных картинок нет"
     static let seacrhTabBarName = "Поиск"
     static let favoriteTabBarName = "Избранное"
-    
     static let searchAlertLabel = "Начните поиск\nЗдесь появится результат"
     
-    static func author(name: String?) -> String {
+    static func detailAuthor(name: String?) -> String {
         return "Автор: " + (name ?? "-")
     }
     
-    static func description(text: String?) -> String {
+    static func detailDescription(text: String?) -> String {
         return "Описание: " + (text ?? "-")
     }
     
-    static func date(text: String?) -> String {
+    static func detailDate(text: String?) -> String {
         guard let text = text else { return "Дата: -" }
         
         let format = DateFormatter()

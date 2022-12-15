@@ -24,6 +24,11 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
     
     //MARK: - Override
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundColor = ColorHelper.lightGray
@@ -35,11 +40,6 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         didSet {
             alpha = isHighlighted ?  0.5 : 1
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
     }
     
     //MARK: - Methods
@@ -57,13 +57,13 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
     }
     
     func setImage() {
+        imageView.image = nil
         activityIndicator.startAnimating()
         viewModel?.getDownloadImage(completion: { [weak self] data in
-            guard let data = data,
-                  let image = UIImage(data: data) else { return }
+            guard let data = data else { return }
             DispatchQueue.main.async {
+                self?.imageView.image = UIImage(data: data)
                 self?.activityIndicator.stopAnimating()
-                self?.imageView.image = image
             }
         })
     }

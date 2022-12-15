@@ -74,14 +74,12 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
     
     private func setData() {
         viewModel?.getData(completion: { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(()):
-                    self?.collectionView.reloadData()
-                    self?.hideAllertLabel()
-                case .failure(let error):
-                    print(error)
-                }
+            switch result {
+            case .success(()):
+                self?.collectionView.reloadData()
+                self?.hideAllertLabel()
+            case .failure(let error):
+                self?.errorHandler(error: error)
             }
         })
     }
@@ -104,9 +102,13 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
             alertLabel.isHidden = false
         }
     }
-}
     
-    //MARK: - CollectionView Delegate & DataSourse
+    private func errorHandler(error: CoreDataError) {
+        present(UIAlertController(errorMessage: error.rawValue), animated: true)
+    }
+}
+
+//MARK: - CollectionView Delegate & DataSourse
 
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     

@@ -13,7 +13,7 @@ class DetailViewModel: DetailViewModelType {
     var description: String
     var date: String
     var url: String?
-    var favorite: Bool
+    var isFavorite: Bool
     
     private var detail: DomainResultModel?
     private var repository: RepositoryType?
@@ -23,11 +23,11 @@ class DetailViewModel: DetailViewModelType {
     required init(detailData: DomainResultModel, repository: RepositoryType) {
         self.repository = repository
         self.url = detailData.imageUrlFull
-        self.name = NameHelper.author(name: detailData.name)
-        self.description = NameHelper.description(text: detailData.description)
-        self.date = NameHelper.date(text: detailData.date)
+        self.name = NameHelper.detailAuthor(name: detailData.name)
+        self.description = NameHelper.detailDescription(text: detailData.description)
+        self.date = NameHelper.detailDate(text: detailData.date)
         self.detail = detailData
-        self.favorite = detail?.isFavorite ?? false
+        self.isFavorite = detail?.isFavorite ?? false
         self.checkFavorite()
     }
     
@@ -38,22 +38,22 @@ class DetailViewModel: DetailViewModelType {
     }
     
     func saveFavorite(completion: @escaping (CoreDataError?) -> Void) {
-        if favorite == false {
+        if isFavorite == false {
             repository?.saveLocalFavorite(data: detail, completion: completion)
         } else {
             repository?.deleteLocalFavorite(data: detail, completion: completion)
         }
-        favorite = !favorite
+        isFavorite = !isFavorite
     }
     
     private func checkFavorite() {
-        repository?.getLocalData { result in
+        repository?.getLocalData { [weak self] result in
             switch result {
                 
             case .success(let data):
                 guard let data = data else { return }
                 for i in data {
-                    if i.id == self.detail?.id ?? "" { self.favorite = true }
+                    if i.id == self?.detail?.id ?? "" { self?.isFavorite = true }
                 }
                 
             case .failure(_):

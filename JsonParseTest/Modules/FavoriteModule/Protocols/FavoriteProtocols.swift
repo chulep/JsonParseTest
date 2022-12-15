@@ -8,9 +8,9 @@
 import Foundation
 
 protocol FavoriteViewModelType {
-    var pictureArray: [DomainResultModel]? { get set }
     init(repository: RepositoryType)
-    func getData(completion: @escaping (Result<(), Error>) -> Void)
+    var pictureArray: [DomainResultModel]? { get set }
+    func getData(completion: @escaping (Result<(), CoreDataError>) -> Void)
     func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType?
     func createDetailViewModel(indexPath: IndexPath) -> DetailViewModelType?
 }

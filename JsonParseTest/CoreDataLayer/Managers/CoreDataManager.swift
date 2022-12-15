@@ -58,6 +58,7 @@ class CoreDataManager: CoreDataManagerType {
             allRecipe = try context.fetch(fetchRequest)
             context.delete(search(id: id, allData: allRecipe))
             try context.save()
+            completion(nil)
             print("CoreDataDelete DONE")
         } catch {
             completion(CoreDataError.deleteFailed)

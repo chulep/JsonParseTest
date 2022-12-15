@@ -32,7 +32,7 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     
     //MARK: - Init
     
-    convenience init(viewModel: SearchViewModelType) {
+    required convenience init(viewModel: SearchViewModelType) {
         self.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
@@ -72,10 +72,10 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
     }
     
     private func setupSearchBar() {
-         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ColorHelper.purple] , for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ColorHelper.purple] , for: .normal)
         searchBar.setValue("Отмена", forKey: "cancelButtonText")
-        searchBar.delegate = self
         navigationItem.titleView = searchBar
+        searchBar.delegate = self
     }
     
     private func setupCollectionView() {
@@ -95,12 +95,11 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
                 switch result {
                 case .success(()):
                     self?.collectionView.reloadData()
-                    self?.activityIndicator.stopAnimating()
                     self?.collectionView.appearAnimation(withDuration: 0.2, deadline: 0, toAlpha: 1)
                 case .failure(let error):
                     self?.errorHandler(error: error)
-                    self?.activityIndicator.stopAnimating()
                 }
+                self?.activityIndicator.stopAnimating()
             }
         })
     }
@@ -134,6 +133,7 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
 //MARK: - Collection View Delegate & Data Sourse
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     //delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel?.result?.count ?? 0
@@ -161,6 +161,18 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let endCell = viewModel?.result?.count else { return }
+        if indexPath.row == endCell - 2 {
+            viewModel?.getDownloadDataNetxPage(completion: { result in
+                DispatchQueue.main.async {
+                    collectionView.reloadData()
+                }
+            })
+        }
+    }
+    
+    // download view
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if viewModel?.isLoading == false {
             return CGSize(width: collectionView.bounds.width, height: 0)
@@ -173,17 +185,6 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LoadingReusableView.identifire, for: indexPath) as! LoadingReusableView
         loadingFooterView = footer
         return footer
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let endCell = viewModel?.result?.count ?? 1
-        if indexPath.row == endCell - 1 {
-            viewModel?.getDownloadDataNetxPage(completion: { result in
-                DispatchQueue.main.async {
-                    collectionView.reloadData()
-                }
-            })
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
@@ -208,6 +209,5 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         hideKeyboard()
     }
-    
 }
 

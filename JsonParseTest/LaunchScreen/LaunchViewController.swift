@@ -15,11 +15,9 @@ final class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         build()
-        
     }
     
     private func build() {
-        print(view.bounds.size)
         imageView.image = image
         view.addSubview(imageView)
         let side = view.bounds.width / 1.5

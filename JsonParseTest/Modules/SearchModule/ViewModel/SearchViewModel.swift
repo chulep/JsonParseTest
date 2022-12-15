@@ -12,10 +12,10 @@ class SearchViewModel: SearchViewModelType {
     var result: [DomainResultModel]?
     var isLoading = false
     
-    private var totalCell: Int?
     private let repository: RepositoryType
-    private var page = 1
     private var searchText: String?
+    private var totalCell: Int?
+    private var page = 1
     
     //MARK: - Init
     
@@ -59,7 +59,6 @@ class SearchViewModel: SearchViewModelType {
                 }
             }
         }
-        print(isLoading)
     }
     
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {

@@ -9,6 +9,8 @@ import Foundation
 
 final class Repository: RepositoryType {
     
+    private let cashe = NSCache<NSString, NSData>()
+    
     //MARK: - Network
     
     func getRemoteData(searchText: String, page: Int, completion: @escaping (Result<[DomainResultModel]?, NetworkError>) -> Void) {
@@ -42,9 +44,17 @@ final class Repository: RepositoryType {
     
     func getRemoteImage(url: String?, completion: @escaping (Data?) -> Void) {
         guard let urlString = url,
-        let url = URL(string: urlString) else { return completion(nil) }
+              let url = URL(string: urlString) else { return completion(nil) }
         
-        NetworkManager.execute.getImageTask(url: url, completion: completion)
+        if let dataCashe = cashe.object(forKey: NSString(string: urlString)) {
+            completion(Data(dataCashe))
+        } else {
+            NetworkManager.execute.getImageTask(url: url) { data in
+                guard let data = data else { completion(nil); return }
+                self.cashe.setObject(NSData(data: data), forKey: NSString(string: urlString))
+                completion(data)
+            }
+        }
     }
     
     //MARK: - CoreData
@@ -67,6 +77,4 @@ final class Repository: RepositoryType {
     func deleteLocalFavorite(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void) {
         CoreDataManager.execute.deleteDataTask(data: data, completion: completion)
     }
-    
-    
 }
