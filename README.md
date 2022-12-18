@@ -13,5 +13,5 @@ ___
 _Used: UIKit, MVVM not reactive, Builder, DI, Repository, URLSession, CoreData, DispatchQueue, NSLayoutConstraint, UICollectionView, Spalsh Launch Screen_
 
 <p align="center">
-  <img src="(https://lh3.googleusercontent.com/pw/AL9nZEVtctyyehT6fzp_YttIYddYBsSXa2aiLCnMrfpJTt5XpoG44XHoLFSGeqEMRHiyPmhqLcwKRMHHjZ8TQ2qlyTWe398LSKQB6o2nL_TE1pXNieZi7E5E3txZD7RRs1it-_CMeui7ZRzCT1gI7hkiSDHJ=s200-no?authuser=0)" />
+  <img src="[https://lh3.googleusercontent.com/pw/AL9nZEVtctyyehT6fzp_YttIYddYBsSXa2aiLCnMrfpJTt5XpoG44XHoLFSGeqEMRHiyPmhqLcwKRMHHjZ8TQ2qlyTWe398LSKQB6o2nL_TE1pXNieZi7E5E3txZD7RRs1it-_CMeui7ZRzCT1gI7hkiSDHJ=s200-no?authuser=0]" />
 </p>
