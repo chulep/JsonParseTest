@@ -1,4 +1,4 @@
-# PicSearch
+# 🏞 PicSearch
 Simple image search app based on Unsplash API
 ___
 The application can carry out the following:
