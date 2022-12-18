@@ -437,7 +437,7 @@
 		5DF841F1291ABE4600E18817 = {
 			isa = PBXGroup;
 			children = (
-				5DF841FC291ABE4600E18817 /* JsonParseTest */,
+				5DF841FC291ABE4600E18817 /* PicSearch */,
 				5DF841FB291ABE4600E18817 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5DF841FC291ABE4600E18817 /* JsonParseTest */ = {
+		5DF841FC291ABE4600E18817 /* PicSearch */ = {
 			isa = PBXGroup;
 			children = (
 				5DF841FD291ABE4600E18817 /* AppDelegate.swift */,
@@ -466,7 +466,7 @@
 				5DE7B89D29366AB9007B3FE6 /* Helpers */,
 				5D24862F29479A34005E2617 /* LaunchScreen */,
 			);
-			path = JsonParseTest;
+			path = PicSearch;
 			sourceTree = "<group>";
 		};
 		5DFB83AA291FD05F00D09558 /* DetailModule */ = {
@@ -729,7 +729,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8BTD5KN5SP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JsonParseTest/Info.plist;
+				INFOPLIST_FILE = PicSearch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -756,7 +756,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8BTD5KN5SP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JsonParseTest/Info.plist;
+				INFOPLIST_FILE = PicSearch/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
