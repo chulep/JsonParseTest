@@ -86,7 +86,7 @@
 		5DE7B8B0293682F7007B3FE6 /* FavoriteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteProtocols.swift; sourceTree = "<group>"; };
 		5DE7B8B22936874B007B3FE6 /* DomainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModel.swift; sourceTree = "<group>"; };
 		5DE7B8B6293688B3007B3FE6 /* UnsplashModel+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsplashModel+Mappable.swift"; sourceTree = "<group>"; };
-		5DF841FA291ABE4600E18817 /* JsonParseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonParseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DF841FA291ABE4600E18817 /* PicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF841FD291ABE4600E18817 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DF841FF291ABE4600E18817 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5DF84201291ABE4600E18817 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -445,7 +445,7 @@
 		5DF841FB291ABE4600E18817 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5DF841FA291ABE4600E18817 /* JsonParseTest.app */,
+				5DF841FA291ABE4600E18817 /* PicSearch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -482,9 +482,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5DF841F9291ABE4600E18817 /* JsonParseTest */ = {
+		5DF841F9291ABE4600E18817 /* PicSearch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5DF84211291ABE4800E18817 /* Build configuration list for PBXNativeTarget "JsonParseTest" */;
+			buildConfigurationList = 5DF84211291ABE4800E18817 /* Build configuration list for PBXNativeTarget "PicSearch" */;
 			buildPhases = (
 				5DF841F6291ABE4600E18817 /* Sources */,
 				5DF841F7291ABE4600E18817 /* Frameworks */,
@@ -494,9 +494,9 @@
 			);
 			dependencies = (
 			);
-			name = JsonParseTest;
+			name = PicSearch;
 			productName = JsonParseTest;
-			productReference = 5DF841FA291ABE4600E18817 /* JsonParseTest.app */;
+			productReference = 5DF841FA291ABE4600E18817 /* PicSearch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -514,7 +514,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5DF841F5291ABE4600E18817 /* Build configuration list for PBXProject "JsonParseTest" */;
+			buildConfigurationList = 5DF841F5291ABE4600E18817 /* Build configuration list for PBXProject "PicSearch" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -527,7 +527,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5DF841F9291ABE4600E18817 /* JsonParseTest */,
+				5DF841F9291ABE4600E18817 /* PicSearch */,
 			);
 		};
 /* End PBXProject section */
@@ -777,7 +777,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5DF841F5291ABE4600E18817 /* Build configuration list for PBXProject "JsonParseTest" */ = {
+		5DF841F5291ABE4600E18817 /* Build configuration list for PBXProject "PicSearch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DF8420F291ABE4800E18817 /* Debug */,
@@ -786,7 +786,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5DF84211291ABE4800E18817 /* Build configuration list for PBXNativeTarget "JsonParseTest" */ = {
+		5DF84211291ABE4800E18817 /* Build configuration list for PBXNativeTarget "PicSearch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DF84212291ABE4800E18817 /* Debug */,
