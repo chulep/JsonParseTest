@@ -86,7 +86,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
             descriptionStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             descriptionStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             descriptionStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            descriptionStackView.heightAnchor.constraint(equalTo: descriptionStackView.widthAnchor, multiplier: 1/3)
+            descriptionStackView.heightAnchor.constraint(equalTo: descriptionStackView.widthAnchor, multiplier: 1/3),
         ])
     }
     

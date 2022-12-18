@@ -4,10 +4,18 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>JsonParseTest.xcscheme_^#shared#^_</key>
+		<key>PicSearch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>5DF841F9291ABE4600E18817</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
