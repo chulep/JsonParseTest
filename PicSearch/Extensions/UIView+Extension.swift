@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView {
+    
     func appearAnimation(withDuration: Double, deadline: Double?, toAlpha: Double) {
         let deadline = deadline ?? 0
         DispatchQueue.main.asyncAfter(deadline: .now() + deadline) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SearchViewModel: SearchViewModelType {
+final class SearchViewModel: SearchViewModelType {
 
     var result: [DomainResultModel]?
     var isLoading = false
@@ -23,7 +23,7 @@ class SearchViewModel: SearchViewModelType {
         self.repository = repository
     }
     
-    //MARK: - Methods
+    //MARK: - Get Data
     
     func getDownloadData(searchText: String, completion: @escaping (Result<(), NetworkError>) -> Void) {
         self.searchText = searchText
@@ -42,7 +42,7 @@ class SearchViewModel: SearchViewModelType {
         }
     }
     
-    func getDownloadDataNetxPage(completion: @escaping (Result<(), NetworkError>) -> Void) {
+    func getDownloadDataNextPage(completion: @escaping (Result<(), NetworkError>) -> Void) {
         isLoading = false
         if totalCell != result?.count {
             isLoading = true
@@ -60,6 +60,8 @@ class SearchViewModel: SearchViewModelType {
             }
         }
     }
+    
+    //MARK: - Create Child ViewModel
     
     func createPhotoCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
         guard let result = result?[indexPath.row] else { return nil }

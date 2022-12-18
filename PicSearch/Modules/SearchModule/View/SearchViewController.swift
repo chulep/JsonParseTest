@@ -48,18 +48,20 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
         addConstraints()
     }
     
-    //MARK: - Methods
-    
-    private func setupSelf() {
-        view.backgroundColor = .white
-        navigationController?.tabBarItem.title = NameHelper.seacrhTabBarName
-        navigationController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-    }
+    //MARK: - Add Subviews
     
     private func addSubviews() {
         view.addSubview(collectionView)
         view.addSubview(alertLabel)
         view.addSubview(activityIndicator)
+    }
+    
+    //MARK: - UI
+    
+    private func setupSelf() {
+        view.backgroundColor = .white
+        navigationController?.tabBarItem.title = NameHelper.seacrhTabBarName
+        navigationController?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
     }
     
     private func addConstraints() {
@@ -70,6 +72,16 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
             alertLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
+    
+    private func createFlowLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 15, height: view.bounds.width / 2 - 15)
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+        return flowLayout
+    }
+    
+    //MARK: - Setup CollectionView & SeachBar
     
     private func setupSearchBar() {
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ColorHelper.purple] , for: .normal)
@@ -84,6 +96,8 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
         collectionView.register(PictureCell.self, forCellWithReuseIdentifier: PictureCell.identifire)
         collectionView.register(LoadingReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: LoadingReusableView.identifire)
     }
+    
+    //MARK: - Set Data
     
     private func downloadData(searchText: String) {
         activityIndicator.startAnimating()
@@ -120,17 +134,9 @@ final class SearchViewController: UIViewController, SearchViewControllerType {
         searchBar.endEditing(true)
         searchBar.setShowsCancelButton(false, animated: true)
     }
-    
-    private func createFlowLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 15, height: view.bounds.width / 2 - 15)
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
-        return flowLayout
-    }
 }
 
-//MARK: - Collection View Delegate & Data Sourse
+//MARK: - CollectionView Delegate & Data Sourse
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -161,18 +167,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let endCell = viewModel?.result?.count else { return }
-        if indexPath.row == endCell - 2 {
-            viewModel?.getDownloadDataNetxPage(completion: { result in
-                DispatchQueue.main.async {
-                    collectionView.reloadData()
-                }
-            })
-        }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LoadingReusableView.identifire, for: indexPath) as! LoadingReusableView
+        loadingFooterView = footer
+        return footer
     }
     
-    // download view
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if viewModel?.isLoading == false {
             return CGSize(width: collectionView.bounds.width, height: 0)
@@ -181,14 +181,20 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: LoadingReusableView.identifire, for: indexPath) as! LoadingReusableView
-        loadingFooterView = footer
-        return footer
-    }
-    
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         loadingFooterView?.animating(viewModel?.isLoading)
+    }
+    
+    // download next page
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let endCell = viewModel?.result?.count else { return }
+        if indexPath.row == endCell - 2 {
+            viewModel?.getDownloadDataNextPage(completion: { result in
+                DispatchQueue.main.async {
+                    collectionView.reloadData()
+                }
+            })
+        }
     }
 }
 

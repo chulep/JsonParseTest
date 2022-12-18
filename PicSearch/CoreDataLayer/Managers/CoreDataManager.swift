@@ -12,6 +12,8 @@ class CoreDataManager: CoreDataManagerType {
     static let execute = CoreDataManager()
     private let coreDataStack = CoreDataStack()
     
+    //MARK: - Get Data
+    
     func getDataTask<T: NSManagedObject>(completion: @escaping (Result<[T]?, CoreDataError>) -> Void) {
         let context = coreDataStack.persistentContainer.viewContext
         let fetchRequest = T.fetchRequest()
@@ -25,6 +27,8 @@ class CoreDataManager: CoreDataManagerType {
             print("ExportCoreData ERROR")
         }
     }
+    
+    //MARK: - Save Data
     
     func saveDataTask(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void) {
         guard let data = data else { return completion(CoreDataError.saveFailed) }
@@ -47,6 +51,8 @@ class CoreDataManager: CoreDataManagerType {
             print("CoreDataSave ERROR")
         }
     }
+    
+    //MARK: - Delete Data
     
     func deleteDataTask(data: DomainResultModel?, completion: @escaping (CoreDataError?) -> Void) {
         guard let id = data?.id else { return completion(CoreDataError.deleteFailed)}

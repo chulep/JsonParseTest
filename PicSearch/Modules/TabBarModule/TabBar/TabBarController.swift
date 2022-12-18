@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, TabBarControllerType {
+final class TabBarController: UITabBarController, TabBarControllerType {
     
     required convenience init(viewControllers: [UIViewController]) {
         self.init(nibName: nil, bundle: nil)

@@ -19,7 +19,7 @@ final class FavoriteViewModel: FavoriteViewModelType {
         self.repository = repository
     }
     
-    //MARK: - Methods
+    //MARK: - Get Data
     
     func getData(completion: @escaping (Result<(), CoreDataError>) -> Void) {
         repository.getLocalData { [weak self] result in
@@ -32,6 +32,8 @@ final class FavoriteViewModel: FavoriteViewModelType {
             }
         }
     }
+    
+    //MARK: - Create Child ViewModel
     
     func createCellViewModel(indexPath: IndexPath) -> PictureCellViewModelType? {
         guard let data = pictureArray?[indexPath.row] else { return nil }

@@ -42,12 +42,14 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         }
     }
     
-    //MARK: - Methods
+    //MARK: - Add Subviews
     
     private func addSubviews() {
         addSubview(activityIndicator)
         addSubview(imageView)
     }
+    
+    //MARK: - UI
     
     private func setupUI() {
         imageView.frame = bounds
@@ -55,6 +57,8 @@ final class PictureCell: UICollectionViewCell, PictureCellType {
         layer.cornerRadius = ConstantHelper.radius
         clipsToBounds = true
     }
+    
+    //MARK: - Set Data
     
     func setImage() {
         imageView.image = nil

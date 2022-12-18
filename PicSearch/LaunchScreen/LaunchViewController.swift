@@ -11,11 +11,15 @@ final class LaunchViewController: UIViewController {
     
     private let image = UIImage(named: "logo")
     private let imageView = UIImageView()
+    
+    //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         build()
     }
+    
+    //MARK: - UI
     
     private func build() {
         imageView.image = image

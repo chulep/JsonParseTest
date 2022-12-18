@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
     
     //MARK: - Init
     
-    convenience init(viewModel: DetailViewModelType?) {
+    required convenience init(viewModel: DetailViewModelType?) {
         self.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
@@ -126,7 +126,7 @@ final class DetailViewController: UIViewController, DetailViewControllerType {
         navigationController?.navigationBar.appearAnimation(withDuration: 0.2, deadline: 1.2, toAlpha: 0)
     }
     
-    //MARK: - Other Methods
+    //MARK: - Dismiss, save & share methods
     
     @objc private func cancelDetail() {
         dismiss(animated: true)

@@ -31,7 +31,7 @@ class DetailViewModel: DetailViewModelType {
         self.checkFavorite()
     }
     
-    //MARK: - Methods
+    //MARK: - Get Data
     
     func getImage(completion: @escaping (Data?) -> Void) {
         repository?.getRemoteImage(url: url, completion: completion)
@@ -45,6 +45,8 @@ class DetailViewModel: DetailViewModelType {
         }
         isFavorite = !isFavorite
     }
+    
+    //MARK: - Support Methods
     
     private func checkFavorite() {
         repository?.getLocalData { [weak self] result in

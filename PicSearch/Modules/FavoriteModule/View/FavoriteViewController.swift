@@ -25,7 +25,7 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
     
     //MARK: - Init
     
-    convenience init(viewModel: FavoriteViewModelType) {
+    required convenience init(viewModel: FavoriteViewModelType) {
         self.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         setupSelf()
@@ -46,17 +46,19 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         setData()
     }
     
-    //MARK: - Methods
+    //MARK: - Add Subviews
+    
+    private func addSubviews() {
+        view.addSubview(collectionView)
+        view.addSubview(alertLabel)
+    }
+    
+    //MARK: - UI
     
     private func setupSelf() {
         view.backgroundColor = ColorHelper.white
         tabBarItem.title = NameHelper.favoriteTabBarName
         tabBarItem.image = UIImage(systemName: "heart")
-    }
-    
-    private func addSubviews() {
-        view.addSubview(collectionView)
-        view.addSubview(alertLabel)
     }
     
     private func addConstraints() {
@@ -66,11 +68,24 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         ])
     }
     
+    private func createCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 15, height: view.bounds.width / 2 - 15)
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
+        flowLayout.sectionHeadersPinToVisibleBounds = true
+        return flowLayout
+    }
+    
+    //MARK: - Setup CollectionView
+    
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(PictureCell.self, forCellWithReuseIdentifier: PictureCell.identifire)
     }
+    
+    //MARK: - Set Data
     
     private func setData() {
         viewModel?.getData(completion: { [weak self] result in
@@ -86,13 +101,8 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
     
     //MARK: - Suppert Methods
     
-    private func createCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: view.bounds.width / 2 - 15, height: view.bounds.width / 2 - 15)
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
-        flowLayout.sectionHeadersPinToVisibleBounds = true
-        return flowLayout
+    private func errorHandler(error: CoreDataError) {
+        present(UIAlertController(errorMessage: error.rawValue), animated: true)
     }
     
     private func hideAllertLabel() {
@@ -101,10 +111,6 @@ final class FavoriteViewController: UIViewController, FavoriteViewControllerType
         } else {
             alertLabel.isHidden = false
         }
-    }
-    
-    private func errorHandler(error: CoreDataError) {
-        present(UIAlertController(errorMessage: error.rawValue), animated: true)
     }
 }
 

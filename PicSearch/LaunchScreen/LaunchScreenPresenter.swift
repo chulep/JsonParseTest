@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LaunchScreenPresenter {
+final class LaunchScreenPresenter: LaunchScreenPresenterType {
     
     private let window = UIWindow()
     private let launchScreen = LaunchViewController()

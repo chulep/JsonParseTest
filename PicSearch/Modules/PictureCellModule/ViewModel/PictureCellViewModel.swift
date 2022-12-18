@@ -19,7 +19,7 @@ class PictureCellViewModel: PictureCellViewModelType {
         self.repository = repository
     }
     
-    //MARK: - Methods
+    //MARK: - Get Data
     
     func getDownloadImage(completion: @escaping (Data?) -> Void) {
         repository?.getRemoteImage(url: result.imageUrlSmall, completion: completion)

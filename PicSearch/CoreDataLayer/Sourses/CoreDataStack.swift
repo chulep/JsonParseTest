@@ -9,7 +9,7 @@ import CoreData
 
 class CoreDataStack {
     
-    // MARK: - Core Data stack
+    //MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
         /*
@@ -18,7 +18,7 @@ class CoreDataStack {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "JsonParseTest")
+        let container = NSPersistentContainer(name: "SavePicture")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -38,7 +38,7 @@ class CoreDataStack {
         return container
     }()
 
-    // MARK: - Core Data Saving support
+    //MARK: - Core Data Saving support
 
     func saveContext () {
         let context = persistentContainer.viewContext

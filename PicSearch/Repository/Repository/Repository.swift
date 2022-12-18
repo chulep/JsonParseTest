@@ -18,9 +18,11 @@ final class Repository: RepositoryType {
         
         NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, NetworkError>) in
             switch result {
+                
             case .success(let data):
-                if data?.total == 0 { return completion(.failure(NetworkError.nothingFound))}
+                if data?.total == 0 { completion(.failure(NetworkError.nothingFound)); return}
                 completion(.success(data?.results.map { $0.domain } ))
+                
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -32,10 +34,12 @@ final class Repository: RepositoryType {
         
         NetworkManager.execute.getModelTask(request: request) { (result: Result<UnsplashModel?, NetworkError>) in
             switch result {
+                
             case .success(let data):
-                if data?.total == 0 { return completion(.failure(NetworkError.nothingFound))}
+                if data?.total == 0 { completion(.failure(NetworkError.nothingFound)); return }
                 let dataModel = data?.results.map { $0.domain }
                 completion(.success(DomainModel(total: data!.total, results: dataModel) ))
+                
             case .failure(let error):
                 completion(.failure(error))
             }
