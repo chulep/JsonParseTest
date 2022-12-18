@@ -1,7 +1,4 @@
 # PicSearch
-<p align="left">
-  <img src="https://lh3.googleusercontent.com/pw/AL9nZEVTfuoWwSCn7xXjLJD72cBkbs6yJEn1FdZ4me1eXhr-AjUibxhK_-VwaGq84wVEtJycldjP3J6QYRPRcEldClvG-mVXMp0DDUrXi63ejJ6rWPahDK86X5y_Vufk-nCL3b7ER46047HeNcwts9W0A55D=s482-no?authuser=0" alt="Image" height="42" width="42" />
-</p>
 Simple image search app based on Unsplash API
 ___
 The application can carry out the following:
@@ -15,3 +12,6 @@ Screanshots:
 ___
 _Used: UIKit, MVVM not reactive, Builder, DI, Repository, URLSession, CoreData, DispatchQueue, NSLayoutConstraint, UICollectionView, Spalsh Launch Screen_
 
+<p align="left">
+  <img src="https://lh3.googleusercontent.com/pw/AL9nZEVTfuoWwSCn7xXjLJD72cBkbs6yJEn1FdZ4me1eXhr-AjUibxhK_-VwaGq84wVEtJycldjP3J6QYRPRcEldClvG-mVXMp0DDUrXi63ejJ6rWPahDK86X5y_Vufk-nCL3b7ER46047HeNcwts9W0A55D=s482-no?authuser=0" alt="Image" height="42" width="42" />
+</p>
