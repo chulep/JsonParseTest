@@ -10,4 +10,4 @@ The application can carry out the following:
 * Save to favorite
 * Share image
 ___
-_Uused: UIKit, MVVM no reactive, Builder, DI, Repository, URLSession, CoreData, DispatchQueue, NSLayoutConstraint, UICollectionView, Spalsh Launch Screen_
+_Uused: UIKit, MVVM not reactive, Builder, DI, Repository, URLSession, CoreData, DispatchQueue, NSLayoutConstraint, UICollectionView, Spalsh Launch Screen_
