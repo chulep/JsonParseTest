@@ -6,8 +6,8 @@ Screanshots:
 ___
 The application can carry out the following:
 * Search image on text
-* Show detail image
+* Show image details
 * Save to favorite
 * Share image
 ___
-_Uused: UIKit, MVVM not reactive, Builder, DI, Repository, URLSession, CoreData, DispatchQueue, NSLayoutConstraint, UICollectionView, Spalsh Launch Screen_
+_Used: UIKit, MVVM not reactive, Builder, DI, Repository, URLSession, CoreData, DispatchQueue, NSLayoutConstraint, UICollectionView, Spalsh Launch Screen_
